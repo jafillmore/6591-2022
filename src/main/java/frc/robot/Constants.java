@@ -25,7 +25,14 @@ public final class Constants {
     public static final int intake = 5;
     public static final int conveyor = 6;
     public static final int shooter = 7;
+
+    public static final double intakePower = 1; 
+    public static final double conveyorlowPower = 0.2;
+    public static final double conveyorhighPower = 1;
+    public static final double shooterlowPower = 0.2;
+    public static final double shooterhighPower = 1; 
   }
+
   public static final class DriveConstants {
     public static final int kRearLeftMotorPort = 1;
     public static final int kRearRightMotorPort = 2;
