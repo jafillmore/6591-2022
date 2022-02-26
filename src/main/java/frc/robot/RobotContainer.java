@@ -14,15 +14,16 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
+import frc.robot.subsystems.*;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
+import pabeles.concurrency.ConcurrencyOps.NewInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import java.util.List;
 
 /*
@@ -34,6 +35,7 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
   // The driver's controller
   private Joystick m_leftStick = new Joystick(0);
@@ -74,6 +76,9 @@ public class RobotContainer {
         new JoystickButton(m_leftStick, 1)
         .whenPressed(() -> ShooterSubsystem.m_intakeFront.set(ShooterConstants.intakePower));
 
+    new JoystickButton(m_rightStick, 3)
+    .whenHeld(new InstantCommand(shooterSubsystem::shooterOn(ShooterConstants.shooterhighPower)));
+    .whenReleased(new InstantCommand() -> shooterSubsystem.shootMotorOff);
   }
 
   /**

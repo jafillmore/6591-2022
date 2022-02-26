@@ -11,28 +11,39 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterSubsystem extends SubsystemBase {
     public final  CANSparkMax m_intakeFront = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushed);
     private final CANSparkMax m_conveyorMiddle = new CANSparkMax(ShooterConstants.conveyor, MotorType.kBrushed);
-    private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless); 
+    private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
+  
+    public DigitalInput limitSwitch = new DigitalInput(ShooterConstants.LimitSwitchPort);
+    private boolean isBallPrimed = false;
+    private boolean onTarget = false;
     
-    public void test() {
-    
+    public void shooterSubsystem() {
+
     }
 
     @Override
     public void periodic() {
+    
+    
+}
 
-    }}
+public void primeBall(){
+    m_conveyorMiddle.setInverted(false);
+   
     if(!limitSwitch.get()){
-        primeMotor.set(0);
+        m_conveyorMiddle.set(0);
         isBallPrimed = true;
         return;
       } else {
-          primeMotor.set(ShooterConst.primeMotorPrimeSpeed);
+          m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
           if(!limitSwitch.get()){
-            primeMotor.set(0);
+            m_conveyorMiddle.set(0);
             isBallPrimed = true;
             return;
           } else {
@@ -40,47 +51,43 @@ public class ShooterSubsystem extends SubsystemBase {
           }
       }
     }
-    
-    public void primeMotorOn (){
-      primeMotor.set(ShooterConst.primeMotorPrimeSpeed);
-}
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    //Both of the methods below were replaced by one method that takes in a shooterSpeed as a parameter
   
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    public void shootOn(){
-  <<<<<<< HEAD
-      shooterMotor.set(-shooterSpeed);
-    
-      SmartDashboard.putNumber("Velocity for Encoder", encoder.getVelocity());
-  =======
-      shooterMotor.setInverted(false);
-      
-      primeMotor.setInverted(false);
-      PID.setReference(shooterSpeed, ControlType.kVelocity);
-      SmartDashboard.putNumber("Velocity from Encoder", encoder.getVelocity());
-      SmartDashboard.putNumber("ShooterSpeed from ShootOn Command", shooterSpeed);
-      
-      if(!isBallPrimed){
-        primeBall();
-      } else {
-       
-        if(encoder.getVelocity() >= (shooterSpeed/3 -500)){
-          primeMotor.set(ShooterConst.primeMotorShootSpeed);
-        } else if(encoder.getVelocity() <= shooterSpeed/3-500) {
-          primeMotor.set(0);
-        }
-      }
+    public void m_conveyorMiddleOn (){
+      m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
     }
-    public void fastShoot(){
-      shooterMotor.setInverted(false);
-      
-      primeMotor.setInverted(false);
-}}
+      ////////////////////////////////////     New Shooter Command (if it doesn't work it is Jade's fault...)  //////////////
+  //If this method does not work, uncomment the methods above and change the method that the button press calls in RobotContainer
+  public void shooterOn (double speedOfShooter){
+    m_shooterEnd.setInverted(false);
+    
+    m_conveyorMiddle.setInverted(false);
+    m_shooterEnd.set(speedOfShooter);
+    m_conveyorMiddle.set(ShooterConstants.conveyorhighPower);
+
+   // PID.setReference(speedOfShooter, ControlType.kVelocity);
+
+    // SmartDashboard.putNumber("Actual Motor RPM", (encoder.getVelocity()));
+    //SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter/3));
+    
+    /*if(!isBallPrimed){
+      primeBall();
+    } else {
+*/
+    /*  if(encoder.getVelocity() >= (speedOfShooter/3 -PIDConst.AllowableSpeedError)){
+        primeMotor.set(ShooterConst.primeMotorShootSpeed);
+      } else if(encoder.getVelocity() <= speedOfShooter/3-PIDConst.AllowableSpeedError) {
+        primeMotor.set(0);
+      }
+    //} */
+  }
+
+  ////////////  Turn off Shooter Motor and Priming Motor ////////////////
+  public void shootMotorOff(){
+    m_shooterEnd.set(0);
+    m_conveyorMiddle.set(0);
+  }
+
+}
 
 
 

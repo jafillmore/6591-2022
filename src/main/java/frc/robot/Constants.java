@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
@@ -30,7 +32,9 @@ public final class Constants {
     public static final double conveyorlowPower = 0.2;
     public static final double conveyorhighPower = 1;
     public static final double shooterlowPower = 0.2;
-    public static final double shooterhighPower = 1; 
+    public static final double shooterhighPower = 1;
+    
+    public static final int LimitSwitchPort = 1;
   }
 
   public static final class DriveConstants {
