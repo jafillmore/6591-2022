@@ -55,8 +55,39 @@ public void primeBall(){
     public void m_conveyorMiddleOn (){
       m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
     }
+      ////////////////////////////////////     New Shooter Command (if it doesn't work it is Jade's fault...)  //////////////
+  //If this method does not work, uncomment the methods above and change the method that the button press calls in RobotContainer
+  public void shooterOn (double speedOfShooter){
+    m_shooterEnd.setInverted(false);
     
-    }
+    m_conveyorMiddle.setInverted(false);
+    m_shooterEnd.set(speedOfShooter);
+    m_conveyorMiddle.set(ShooterConstants.conveyorhighPower);
+
+   // PID.setReference(speedOfShooter, ControlType.kVelocity);
+
+    // SmartDashboard.putNumber("Actual Motor RPM", (encoder.getVelocity()));
+    //SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter/3));
+    
+    /*if(!isBallPrimed){
+      primeBall();
+    } else {
+*/
+    /*  if(encoder.getVelocity() >= (speedOfShooter/3 -PIDConst.AllowableSpeedError)){
+        primeMotor.set(ShooterConst.primeMotorShootSpeed);
+      } else if(encoder.getVelocity() <= speedOfShooter/3-PIDConst.AllowableSpeedError) {
+        primeMotor.set(0);
+      }
+    //} */
+  }
+
+  ////////////  Turn off Shooter Motor and Priming Motor ////////////////
+  public void shootMotorOff(){
+    m_shooterEnd.set(0);
+    m_conveyorMiddle.set(0);
+  }
+
+}
 
 
 
