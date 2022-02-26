@@ -73,12 +73,19 @@ public class RobotContainer {
     new JoystickButton(m_rightStick, 1)
         .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
         .whenReleased(() -> m_robotDrive.setMaxOutput(1));
-        new JoystickButton(m_leftStick, 1)
-        .whenPressed(() -> ShooterSubsystem.m_intakeFront.set(ShooterConstants.intakePower));
+
+    new JoystickButton(m_leftStick, 1)
+        .whenHeld(new RunCommand(() -> shooterSubsystem.primeBall()))
+        .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
 
     new JoystickButton(m_rightStick, 3)
-    .whenHeld(new InstantCommand(shooterSubsystem::shooterOn(ShooterConstants.shooterhighPower)));
-    .whenReleased(new InstantCommand() -> shooterSubsystem.shootMotorOff);
+    .whenHeld(new RunCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterhighPower)))
+    .whenReleased(new RunCommand(() -> shooterSubsystem.shooterOff()));
+  
+
+    new JoystickButton(m_rightStick, 4)
+    .whenHeld(new RunCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterlowPower)))
+    .whenReleased(new RunCommand(() -> shooterSubsystem.shooterOff()));
   }
 
   /**

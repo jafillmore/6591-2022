@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,10 +50,20 @@ public void primeBall(){
           }
       }
     }
-  
+
+    
+    public void intakeOff(){
+      m_intakeFront.set(0);
+      m_conveyorMiddle.set(0);
+    }
+
+
     public void m_conveyorMiddleOn (){
       m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
     }
+
+
+
       ////////////////////////////////////     New Shooter Command (if it doesn't work it is Jade's fault...)  //////////////
   //If this method does not work, uncomment the methods above and change the method that the button press calls in RobotContainer
   public void shooterOn (double speedOfShooter){
@@ -82,7 +91,7 @@ public void primeBall(){
   }
 
   ////////////  Turn off Shooter Motor and Priming Motor ////////////////
-  public void shootMotorOff(){
+  public void shooterOff(){
     m_shooterEnd.set(0);
     m_conveyorMiddle.set(0);
   }
