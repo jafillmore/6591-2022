@@ -15,15 +15,15 @@ import com.revrobotics.CANSparkMax;
 public class ShooterSubsystem extends SubsystemBase {
     public final  CANSparkMax m_intakeFront = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushed);
     private final CANSparkMax m_conveyorMiddle = new CANSparkMax(ShooterConstants.conveyor, MotorType.kBrushed);
-    private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
-  
+    private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless); 
+    
     public void test() {
-
+    
     }
 
     @Override
     public void periodic() {
-    
+
     }}
     if(!limitSwitch.get()){
         primeMotor.set(0);
@@ -40,10 +40,10 @@ public class ShooterSubsystem extends SubsystemBase {
           }
       }
     }
-  
+    
     public void primeMotorOn (){
       primeMotor.set(ShooterConst.primeMotorPrimeSpeed);
-    }
+}
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     

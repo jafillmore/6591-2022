@@ -58,7 +58,7 @@ public class DriveSubsystem extends SubsystemBase {
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
     //m_frontRight.setInverted(true);
-    m_rearRight.setInverted(true);
+    //m_rearRight.setInverted(true);
   }
 
   @Override
