@@ -11,28 +11,39 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterSubsystem extends SubsystemBase {
     public final  CANSparkMax m_intakeFront = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushed);
     private final CANSparkMax m_conveyorMiddle = new CANSparkMax(ShooterConstants.conveyor, MotorType.kBrushed);
     private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
   
-    public void test() {
+    public DigitalInput limitSwitch = new DigitalInput(ShooterConstants.LimitSwitchPort);
+    private boolean isBallPrimed = false;
+    private boolean onTarget = false;
+    
+    public void shooterSubsystem() {
 
     }
 
     @Override
     public void periodic() {
     
-    }}
+    
+}
+
+public void primeBall(){
+    m_conveyorMiddle.setInverted(false);
+   
     if(!limitSwitch.get()){
-        primeMotor.set(0);
+        m_conveyorMiddle.set(0);
         isBallPrimed = true;
         return;
       } else {
-          primeMotor.set(ShooterConst.primeMotorPrimeSpeed);
+          m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
           if(!limitSwitch.get()){
-            primeMotor.set(0);
+            m_conveyorMiddle.set(0);
             isBallPrimed = true;
             return;
           } else {
@@ -41,46 +52,11 @@ public class ShooterSubsystem extends SubsystemBase {
       }
     }
   
-    public void primeMotorOn (){
-      primeMotor.set(ShooterConst.primeMotorPrimeSpeed);
+    public void m_conveyorMiddleOn (){
+      m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    //Both of the methods below were replaced by one method that takes in a shooterSpeed as a parameter
-  
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    public void shootOn(){
-  <<<<<<< HEAD
-      shooterMotor.set(-shooterSpeed);
-    
-      SmartDashboard.putNumber("Velocity for Encoder", encoder.getVelocity());
-  =======
-      shooterMotor.setInverted(false);
-      
-      primeMotor.setInverted(false);
-      PID.setReference(shooterSpeed, ControlType.kVelocity);
-      SmartDashboard.putNumber("Velocity from Encoder", encoder.getVelocity());
-      SmartDashboard.putNumber("ShooterSpeed from ShootOn Command", shooterSpeed);
-      
-      if(!isBallPrimed){
-        primeBall();
-      } else {
-       
-        if(encoder.getVelocity() >= (shooterSpeed/3 -500)){
-          primeMotor.set(ShooterConst.primeMotorShootSpeed);
-        } else if(encoder.getVelocity() <= shooterSpeed/3-500) {
-          primeMotor.set(0);
-        }
-      }
     }
-    public void fastShoot(){
-      shooterMotor.setInverted(false);
-      
-      primeMotor.setInverted(false);
-}}
 
 
 
