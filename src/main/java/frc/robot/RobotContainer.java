@@ -55,7 +55,7 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    m_leftStick.getY(),
+                    -m_leftStick.getY(),
                     m_leftStick.getX(),
                     m_rightStick.getZ(),
                     false),
@@ -79,13 +79,13 @@ public class RobotContainer {
         .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
 
     new JoystickButton(m_rightStick, 3)
-    .whenHeld(new RunCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterhighPower)))
-    .whenReleased(new RunCommand(() -> shooterSubsystem.shooterOff()));
+    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterhighPower)))
+    .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
   
 
     new JoystickButton(m_rightStick, 4)
-    .whenHeld(new RunCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterlowPower)))
-    .whenReleased(new RunCommand(() -> shooterSubsystem.shooterOff()));
+    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterlowPower)))
+    .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
   }
 
   /**

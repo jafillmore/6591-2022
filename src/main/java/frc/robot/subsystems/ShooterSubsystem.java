@@ -34,7 +34,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 public void primeBall(){
     m_conveyorMiddle.setInverted(false);
-   
+    m_intakeFront.set(0.5);
     if(!limitSwitch.get()){
         m_conveyorMiddle.set(0);
         isBallPrimed = true;
@@ -67,9 +67,9 @@ public void primeBall(){
       ////////////////////////////////////     New Shooter Command (if it doesn't work it is Jade's fault...)  //////////////
   //If this method does not work, uncomment the methods above and change the method that the button press calls in RobotContainer
   public void shooterOn (double speedOfShooter){
-    m_shooterEnd.setInverted(false);
-    
+    m_shooterEnd.setInverted(true);
     m_conveyorMiddle.setInverted(false);
+    
     m_shooterEnd.set(speedOfShooter);
     m_conveyorMiddle.set(ShooterConstants.conveyorhighPower);
 

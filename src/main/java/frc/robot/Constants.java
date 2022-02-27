@@ -29,10 +29,10 @@ public final class Constants {
     public static final int shooter = 7;
 
     public static final double intakePower = 1; 
-    public static final double conveyorlowPower = 0.2;
-    public static final double conveyorhighPower = 1;
-    public static final double shooterlowPower = 0.2;
-    public static final double shooterhighPower = 1;
+    public static final double conveyorlowPower = 0.4;
+    public static final double conveyorhighPower = 1.0;
+    public static final double shooterlowPower = 0.5;
+    public static final double shooterhighPower = 0.8;
     
     public static final int LimitSwitchPort = 1;
   }
