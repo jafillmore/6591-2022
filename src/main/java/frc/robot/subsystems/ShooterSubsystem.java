@@ -34,21 +34,24 @@ public class ShooterSubsystem extends SubsystemBase {
 
 public void primeBall(){
     m_conveyorMiddle.setInverted(false);
-    m_intakeFront.set(0.5);
-    if(!limitSwitch.get()){
-        m_conveyorMiddle.set(0);
-        isBallPrimed = true;
-        return;
-      } else {
-          m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
-          if(!limitSwitch.get()){
-            m_conveyorMiddle.set(0);
-            isBallPrimed = true;
-            return;
-          } else {
-            isBallPrimed = false;
+    m_intakeFront.set(ShooterConstants.intakePower);
+    m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
+   
+    /*
+      if(limitSwitch.get()){
+          m_conveyorMiddle.set(0);
+          isBallPrimed = true;
+          return;
+        } else {
+            m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
+            if(!limitSwitch.get()){
+              m_conveyorMiddle.set(0);
+              isBallPrimed = false;
+              return;
+            } 
+
           }
-      }
+    */
     }
 
     
