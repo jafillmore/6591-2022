@@ -13,7 +13,6 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.Constants;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -55,8 +54,8 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
+                    m_rightStick.getX(),
                     -m_leftStick.getY(),
-                    m_leftStick.getX(),
                     m_rightStick.getZ(),
                     false),
             m_robotDrive));
