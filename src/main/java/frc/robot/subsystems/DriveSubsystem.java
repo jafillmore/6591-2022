@@ -19,28 +19,24 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
 public class DriveSubsystem extends SubsystemBase {
+  //Define the motor contollers
   private final CANSparkMax m_frontLeft = new CANSparkMax(DriveConstants.kFrontLeftMotorPort, MotorType.kBrushless);
   private final CANSparkMax m_rearLeft = new CANSparkMax(DriveConstants.kRearLeftMotorPort, MotorType.kBrushless);
   private final CANSparkMax m_frontRight = new CANSparkMax(DriveConstants.kFrontRightMotorPort, MotorType.kBrushless);
   private final CANSparkMax m_rearRight = new CANSparkMax(DriveConstants.kRearRightMotorPort, MotorType.kBrushless);
 
-
-
+  //Assign motors to Mechanum Drive
   private final MecanumDrive m_drive = new MecanumDrive(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);
 
-  // The front-left-side drive encoder
+  // Define the Encoders
   private final RelativeEncoder m_frontLeftEncoder = m_frontLeft.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
-
-  // The rear-left-side drive encoder
   private final RelativeEncoder m_rearLeftEncoder = m_rearLeft.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
-
-  // The front-right--side drive encoder
   private final RelativeEncoder m_frontRightEncoder = m_frontRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
-
-  // The rear-right-side drive encoder
   private final RelativeEncoder m_rearRightEncoder = m_rearRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
   // The gyro sensor
+  // **************  THIS NEEDS TO BE UPDATED!  ***************************
+  //*************** Switch to Kauai Labs NavX-MPX - see details at:  https://www.kauailabs.com/navx-mxp/
   private final Gyro m_gyro = new ADXRS450_Gyro();
 
   // Odometry class for tracking robot pose
