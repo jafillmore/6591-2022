@@ -22,6 +22,7 @@ public class ShooterSubsystem extends SubsystemBase {
     
     public void shooterSubsystem() {
 
+
     }
 
     @Override
@@ -31,7 +32,8 @@ public class ShooterSubsystem extends SubsystemBase {
 }
 
 public void primeBall(){
-    m_conveyorMiddle.setInverted(false);
+  m_conveyorMiddle.setInverted(false);
+  m_intakeFront.setInverted(true);
     m_intakeFront.set(ShooterConstants.intakePower);
     m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
    

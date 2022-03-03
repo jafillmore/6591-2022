@@ -17,6 +17,7 @@ import frc.robot.subsystems.*;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.Constants.ClimberConstants;
 // ******** Not sure what this import is for....  import pabeles.concurrency.ConcurrencyOps.NewInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
@@ -35,10 +36,12 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   // The driver's controller
   private Joystick m_leftStick = new Joystick(0);
   private Joystick m_rightStick = new Joystick(1);
+  private Joystick m_bBox = new Joystick(2);
   //private Joystick m_buttonBox = new Joystick(2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -85,7 +88,30 @@ public class RobotContainer {
     new JoystickButton(m_rightStick, 4)
     .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterlowPower)))
     .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
-  }
+
+
+    new JoystickButton(m_bBox, 11)
+    .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmForward()))
+    .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
+
+    new JoystickButton(m_bBox, 13)
+    .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmForward()))
+    .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+
+    new JoystickButton(m_bBox, 12)
+    .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmBack()))
+    .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
+
+    new JoystickButton(m_bBox, 14)
+    .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmBack()))
+    .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+
+/////// Insert new buttons above here!
+}
+
+
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
