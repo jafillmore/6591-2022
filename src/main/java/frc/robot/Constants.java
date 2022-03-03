@@ -19,19 +19,21 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  */
 public final class Constants {
   public static final class ClimberConstants{
-    
-    //********** UPDATE REQUIRED **********************
-    // ********* Need to confirm CAN ID numbers for 
-    public static final int kLeftArmPositionMotorPort = 8;
-    public static final int kLeftWinchMotorPort = 9;
+        
+    // Motor CAN ID numbers 
+    public static final int kLeftArmPositionMotorPort = 9;
+    public static final int kLeftWinchMotorPort = 11;
     public static final int kRightWinchMotorPort = 10;
-    public static final int kRightArmPositionMotorPort = 11;
+    public static final int kRightArmPositionMotorPort = 8;
 
     // Roborio Ports for arm position encoders
     //********** UPDATE REQUIRED **********************
     // ********* Need to confirm Port IDs for seat motor encoders 
 
+    // Power for arm rotation
+    public static final double rotatePower = 0.25;
 
+    // Constants for arm rotation PID Control
 
 
   }
@@ -44,7 +46,7 @@ public final class Constants {
     
     // Intake and Shooter Power Settings
     public static final double intakePower = 1; 
-    public static final double conveyorlowPower = 0.4;
+    public static final double conveyorlowPower = 0.6;
     public static final double conveyorhighPower = 1.0;
     public static final double shooterlowPower = 0.5;
     public static final double shooterhighPower = 0.8;
