@@ -14,6 +14,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -39,9 +40,9 @@ public class RobotContainer {
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   // The driver's controller
-  private Joystick m_leftStick = new Joystick(0);
-  private Joystick m_rightStick = new Joystick(1);
-  private Joystick m_bBox = new Joystick(2);
+  private Joystick m_leftStick = new Joystick(JoystickConstants.kLeftJoystickPort);
+  private Joystick m_rightStick = new Joystick(JoystickConstants.kRightJoystickPort);
+  private Joystick m_bBox = new Joystick(JoystickConstants.kButtonBoxPort);
   //private Joystick m_buttonBox = new Joystick(2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -72,37 +73,37 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Drive at half speed when the right bumper is held
-    new JoystickButton(m_rightStick, 1)
-        .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
+    new JoystickButton(m_rightStick, JoystickConstants.kDriveSpeedLimiterButton)
+        .whenPressed(() -> m_robotDrive.setMaxOutput(DriveConstants.kLowSpeedDrivePowerLimit))
         .whenReleased(() -> m_robotDrive.setMaxOutput(1));
 
-    new JoystickButton(m_leftStick, 1)
+    new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
         .whenHeld(new RunCommand(() -> shooterSubsystem.primeBall()))
         .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
 
-    new JoystickButton(m_rightStick, 3)
-    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterhighPower)))
+    new JoystickButton(m_rightStick, JoystickConstants.kShootHighButton)
+    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
     .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
   
 
-    new JoystickButton(m_rightStick, 4)
-    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterlowPower)))
+    new JoystickButton(m_rightStick, JoystickConstants.kShootLowButton)
+    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
     .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
 
-    new JoystickButton(m_bBox, 11)
+    new JoystickButton(m_bBox, JoystickConstants.kLeftArmFowardButton)
     .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmForward()))
     .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
 
-    new JoystickButton(m_bBox, 13)
+    new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
     .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmForward()))
     .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
 
-    new JoystickButton(m_bBox, 12)
+    new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
     .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmBack()))
     .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
 
-    new JoystickButton(m_bBox, 14)
+    new JoystickButton(m_bBox, JoystickConstants.kRightArmBackButton)
     .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmBack()))
     .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
 

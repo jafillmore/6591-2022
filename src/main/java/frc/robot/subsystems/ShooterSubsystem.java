@@ -31,27 +31,35 @@ public class ShooterSubsystem extends SubsystemBase {
     
 }
 
-public void primeBall(){
-  m_conveyorMiddle.setInverted(false);
-  m_intakeFront.setInverted(true);
+  public void primeBall(){
+    m_conveyorMiddle.setInverted(false);
+    m_intakeFront.setInverted(true);
     m_intakeFront.set(ShooterConstants.intakePower);
-    m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
-   
+    m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
+    
     /*
-      if(limitSwitch.get()){
-          m_conveyorMiddle.set(0);
-          isBallPrimed = true;
+    if(limitSwitch.get()){
+      m_conveyorMiddle.set(0);
+      isBallPrimed = true;
+      Return;
+    } else {
+      m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
+      if(!limitSwitch.get()){
+        m_conveyorMiddle.set(0);
+        isBallPrimed = false;
           return;
-        } else {
-            m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
-            if(!limitSwitch.get()){
-              m_conveyorMiddle.set(0);
-              isBallPrimed = false;
-              return;
-            } 
+      } 
 
-          }
+    }
     */
+  }
+
+    // Method to to reverse Intake and eject balls
+    public void ejectBall(){
+      m_conveyorMiddle.setInverted(true);
+      m_intakeFront.setInverted(false);
+      m_intakeFront.set(ShooterConstants.intakePower);
+      m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     }
 
     
@@ -62,19 +70,19 @@ public void primeBall(){
 
 
     public void m_conveyorMiddleOn (){
-      m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
+      m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
     }
 
 
 
-      ////////////////////////////////////     New Shooter Command (if it doesn't work it is Jade's fault...)  //////////////
-  //If this method does not work, uncomment the methods above and change the method that the button press calls in RobotContainer
+      ///////////////    Shooter Command   //////////////
+
   public void shooterOn (double speedOfShooter){
     m_shooterEnd.setInverted(true);
     m_conveyorMiddle.setInverted(false);
     
     m_shooterEnd.set(speedOfShooter);
-    m_conveyorMiddle.set(ShooterConstants.conveyorhighPower);
+    m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
 
    // PID.setReference(speedOfShooter, ControlType.kVelocity);
 
@@ -93,7 +101,7 @@ public void primeBall(){
     //} */
   }
 
-  ////////////  Turn off Shooter Motor and Priming Motor ////////////////
+  ////////////  Turn off Shooter Motor and Conveyer Motor ////////////////
   public void shooterOff(){
     m_shooterEnd.set(0);
     m_conveyorMiddle.set(0);
