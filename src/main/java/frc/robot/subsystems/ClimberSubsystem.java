@@ -49,6 +49,8 @@ public class ClimberSubsystem extends SubsystemBase {
     // Method to Rotate arms 
     // *********** UPDATE NEEDED **********************
     // Need to aadd a method using PID control to Rotate the arms to a target position
+    
+    // Temporary method using button box to position arms
     public void leftArmForward(){
       m_positionLeft.set(-ClimberConstants.rotatePower);
     }
