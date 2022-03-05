@@ -18,7 +18,6 @@ import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.Constants.ClimberConstants;
 // ******** Not sure what this import is for....  import pabeles.concurrency.ConcurrencyOps.NewInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
@@ -42,8 +41,9 @@ public class RobotContainer {
   // The driver's controller
   private Joystick m_leftStick = new Joystick(JoystickConstants.kLeftJoystickPort);
   private Joystick m_rightStick = new Joystick(JoystickConstants.kRightJoystickPort);
+  // The Co-Drivers Button Box
   private Joystick m_bBox = new Joystick(JoystickConstants.kButtonBoxPort);
-  //private Joystick m_buttonBox = new Joystick(2);
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,7 +54,7 @@ public class RobotContainer {
     // Set the default drive command to split-stick arcade drive
     m_robotDrive.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
-        // hand, and turning controlled by the right.
+        // hand, and drifting and turning controlled by the right.
         new RunCommand(
             () ->
                 m_robotDrive.drive(
@@ -72,40 +72,64 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Drive at half speed when the right bumper is held
-    new JoystickButton(m_rightStick, JoystickConstants.kDriveSpeedLimiterButton)
-        .whenPressed(() -> m_robotDrive.setMaxOutput(DriveConstants.kLowSpeedDrivePowerLimit))
-        .whenReleased(() -> m_robotDrive.setMaxOutput(1));
+    
+    // ****************     Driving Buttons    *****************************************************
+        // Drive at half speed when the right bumper is held
+            new JoystickButton(m_rightStick, JoystickConstants.kDriveSpeedLimiterButton)
+                .whenPressed(() -> m_robotDrive.setMaxOutput(DriveConstants.kLowSpeedDrivePowerLimit))
+                .whenReleased(() -> m_robotDrive.setMaxOutput(1));
 
-    new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
-        .whenHeld(new RunCommand(() -> shooterSubsystem.primeBall()))
-        .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
-
-    new JoystickButton(m_rightStick, JoystickConstants.kShootHighButton)
-    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
-    .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
-  
-
-    new JoystickButton(m_rightStick, JoystickConstants.kShootLowButton)
-    .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
-    .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
+    
+    // *********************************************************************************************
+    // ****************    Shooter and Intake Buttons    *******************************************
+    // *********************************************************************************************
 
 
-    new JoystickButton(m_bBox, JoystickConstants.kLeftArmFowardButton)
-    .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmForward()))
-    .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
+        // ****************    Intake Button   *********************************************************
+            new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
+                .whenHeld(new RunCommand(() -> shooterSubsystem.primeBall()))
+                .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
+            
+        // ****************    Shoot High Button   *****************************************************
+            new JoystickButton(m_rightStick, JoystickConstants.kShootHighButton)
+            .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
+            .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
+        
+        // ****************    Shoot Low Button   ******************************************************
+            new JoystickButton(m_rightStick, JoystickConstants.kShootLowButton)
+            .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
+            .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
-    new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
-    .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmForward()))
-    .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
 
-    new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
-    .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmBack()))
-    .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
+    // *********************************************************************************************
+    // ****************    Climber Buttons    ******************************************************
+    // *********************************************************************************************
 
-    new JoystickButton(m_bBox, JoystickConstants.kRightArmBackButton)
-    .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmBack()))
-    .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+        // ****************    Manual Arm Rotation Buttons  **************************************
+            new JoystickButton(m_bBox, JoystickConstants.kLeftArmFowardButton)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmForward()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
+
+            new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmForward()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+
+        // ****************    Manual Winch Buttons  **************************************
+            new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmBack()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
+
+            new JoystickButton(m_bBox, JoystickConstants.kRightArmBackButton)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmBack()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+
+
+
+
+
+
+
+
 
 /////// Insert new buttons above here!
 }
