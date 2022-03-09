@@ -40,15 +40,27 @@ public class ClimberSubsystem extends SubsystemBase {
     // *********** UPDATE NEEDED **********************
     // Need to add a method using PID control to extend the arms to a target position
 
+    public void extendArms() {
+
+    }
+
     // ************************************************
     // Method to retract arms 
     // *********** UPDATE NEEDED **********************
     // Need to add a method using PID control to retract the arms to a target position
 
+    public void retractArms() {
+
+    }
+
     // ************************************************
     // Method to Rotate arms 
     // *********** UPDATE NEEDED **********************
     // Need to aadd a method using PID control to Rotate the arms to a target position
+
+    public void rotateArms() {
+      
+    }
     
     // Temporary method using button box to position arms
     public void leftArmForward(){
