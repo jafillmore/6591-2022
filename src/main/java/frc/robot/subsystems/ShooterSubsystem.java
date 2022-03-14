@@ -16,6 +16,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANSparkMax m_conveyorMiddle = new CANSparkMax(ShooterConstants.conveyor, MotorType.kBrushed);
     private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
   
+    
     public DigitalInput limitSwitch = new DigitalInput(ShooterConstants.LimitSwitchPort);
     private boolean isBallPrimed = false;
     private boolean onTarget = false;
