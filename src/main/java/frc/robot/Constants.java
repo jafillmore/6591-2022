@@ -27,14 +27,16 @@ public final class Constants {
     public static final int kButtonBoxPort = 2;
 
     // Left Joystick Buttons
-    public static final int kIntakeButton = 1;
-    public static final int kReverseIntakeButton = 2;
+    
+    
+    public static final int kIntakeButton = 3;
 
     // Right Joystick Buttons
     public static final int kDriveSpeedLimiterButton = 1;
     public static final int kShootHighButton = 3;
     public static final int kShootLowButton = 4;
-
+    public static final int kConveyor =1; 
+    public static final int kReverseIntakeButton = 2;
     // Button Box Buttons
     public static final int kLeftArmFowardButton = 11;
     public static final int kLeftArmBackButton = 12;

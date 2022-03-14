@@ -32,10 +32,10 @@ public class ShooterSubsystem extends SubsystemBase {
 }
 
   public void primeBall(){
-    m_conveyorMiddle.setInverted(false);
+    //m_conveyorMiddle.setInverted(false);
     m_intakeFront.setInverted(true);
     m_intakeFront.set(ShooterConstants.intakePower);
-    m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
+    //m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
     
     /*
     if(limitSwitch.get()){
@@ -54,12 +54,14 @@ public class ShooterSubsystem extends SubsystemBase {
     */
   }
 
+ 
+
     // Method to to reverse Intake and eject balls
     public void ejectBall(){
-      m_conveyorMiddle.setInverted(true);
+     // m_conveyorMiddle.setInverted(true);
       m_intakeFront.setInverted(false);
       m_intakeFront.set(ShooterConstants.intakePower);
-      m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+     // m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     }
 
     
@@ -71,9 +73,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void m_conveyorMiddleOn (){
       m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
+      m_conveyorMiddle.setInverted(false);
     }
 
-
+    public void m_conveyorMiddleOff (){
+      m_conveyorMiddle.set(0);
+    }
 
       ///////////////    Shooter Command   //////////////
 
@@ -108,6 +113,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
 }
+
+
 
 
 

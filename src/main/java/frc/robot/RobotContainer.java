@@ -55,7 +55,7 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
-        new RunCommand(
+        new InstantCommand(
             () ->
                 m_robotDrive.drive(
                     m_rightStick.getX(),
@@ -74,22 +74,24 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Drive at half speed when the right bumper is held
     new JoystickButton(m_rightStick, JoystickConstants.kDriveSpeedLimiterButton)
-        .whenPressed(() -> m_robotDrive.setMaxOutput(DriveConstants.kLowSpeedDrivePowerLimit))
-        .whenReleased(() -> m_robotDrive.setMaxOutput(1));
+    .whenPressed(() -> m_robotDrive.setMaxOutput(DriveConstants.kLowSpeedDrivePowerLimit))
+    .whenReleased(() -> m_robotDrive.setMaxOutput(1));
 
     new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
-        .whenHeld(new RunCommand(() -> shooterSubsystem.primeBall()))
-        .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
+    .whenHeld(new InstantCommand(() -> shooterSubsystem.primeBall()))
+    .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
 
     new JoystickButton(m_rightStick, JoystickConstants.kShootHighButton)
     .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
     .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
   
-
     new JoystickButton(m_rightStick, JoystickConstants.kShootLowButton)
     .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
     .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
+    new JoystickButton(m_leftStick, JoystickConstants.kConveyor)
+    .whenHeld(new InstantCommand(() -> shooterSubsystem.m_conveyorMiddleOn()))
+    .whenReleased(new InstantCommand(() -> shooterSubsystem.m_conveyorMiddleOff()));
 
     new JoystickButton(m_bBox, JoystickConstants.kLeftArmFowardButton)
     .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmForward()))
