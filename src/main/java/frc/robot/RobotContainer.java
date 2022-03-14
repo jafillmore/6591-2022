@@ -45,6 +45,7 @@ public class RobotContainer {
   private Joystick m_bBox = new Joystick(JoystickConstants.kButtonBoxPort);
   
 
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -58,9 +59,9 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    m_rightStick.getX(),
-                    -m_leftStick.getY(),
-                    m_rightStick.getZ(),
+                    m_leftStick.getX(),
+                    -m_rightStick.getY(),
+                    m_leftStick.getZ(),
                     false),
             m_robotDrive));
   }
@@ -86,17 +87,22 @@ public class RobotContainer {
 
 
         // ****************    Intake Button   *********************************************************
-            new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
+            new JoystickButton(m_rightStick, JoystickConstants.kIntakeButton)
                 .whileHeld(new InstantCommand(() -> shooterSubsystem.primeBall()))
                 .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
+
+         // ****************    Reverse Intake   *********************************************************
+         new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
+         .whileHeld(new InstantCommand(() -> shooterSubsystem.ejectBall()))
+         .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
             
         // ****************    Shoot High Button   *****************************************************
-            new JoystickButton(m_rightStick, JoystickConstants.kShootHighButton)
+            new JoystickButton(m_leftStick, JoystickConstants.kShootHighButton)
             .whileHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
             .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
         
         // ****************    Shoot Low Button   ******************************************************
-            new JoystickButton(m_rightStick, JoystickConstants.kShootLowButton)
+            new JoystickButton(m_leftStick, JoystickConstants.kShootLowButton)
             .whileHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
             .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
