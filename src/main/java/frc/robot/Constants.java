@@ -81,8 +81,8 @@ public final class Constants {
     public static final double intakePower = 1; 
     public static final double conveyorLowPower = 0.6;
     public static final double conveyorHighPower = 1.0;
-    public static final double shooterLowPower = 0.5;
-    public static final double shooterHighPower = 0.8;
+    public static final double shooterLowPower = 0.6;
+    public static final double shooterHighPower = 0.9;
     
     // Port for 'Ball is Primed' Limit Switch
     // ********* UPDATE REQUIRED **********************
