@@ -87,17 +87,17 @@ public class RobotContainer {
 
         // ****************    Intake Button   *********************************************************
             new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
-                .whenHeld(new RunCommand(() -> shooterSubsystem.primeBall()))
-                .whenReleased(new RunCommand(() -> shooterSubsystem.intakeOff()));
+                .whileHeld(new InstantCommand(() -> shooterSubsystem.primeBall()))
+                .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
             
         // ****************    Shoot High Button   *****************************************************
             new JoystickButton(m_rightStick, JoystickConstants.kShootHighButton)
-            .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
+            .whileHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
             .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
         
         // ****************    Shoot Low Button   ******************************************************
             new JoystickButton(m_rightStick, JoystickConstants.kShootLowButton)
-            .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
+            .whileHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
             .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
 
