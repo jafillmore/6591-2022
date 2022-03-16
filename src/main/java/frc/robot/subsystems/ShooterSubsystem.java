@@ -9,6 +9,7 @@ import com.revrobotics.SparkMaxRelativeEncoder;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -82,8 +83,13 @@ public class ShooterSubsystem extends SubsystemBase {
     m_shooterEnd.setInverted(true);
     m_conveyorMiddle.setInverted(false);
     
+    
     m_shooterEnd.set(speedOfShooter);
+    Timer.delay(ShooterConstants.conveyorDelay);
     m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+    
+    
+ 
 
    // PID.setReference(speedOfShooter, ControlType.kVelocity);
 

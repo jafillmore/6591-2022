@@ -81,10 +81,13 @@ public final class Constants {
     public static final double intakePower = 1; 
     public static final double conveyorLowPower = 0.6;
     public static final double conveyorHighPower = 1.0;
-    public static final double shooterLowPower = 0.7;
+    public static final double shooterLowPower = 0.45;
     public static final double shooterHighPower = 1.0;
+
+    // Conveyer Delay before Shooting
+    public static final double conveyorDelay = 1.0;
     
-    // Port for 'Ball is Primed' Limit Switch
+    // Port for 'Ball is Primed' Limit Switch 
     // ********* UPDATE REQUIRED **********************
     // ********* Confrim DIO Port Number Once encoder wiring is done...
     public static final int LimitSwitchPort = 1;

@@ -74,12 +74,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
-    // ****************     Driving Buttons    *****************************************************
+    /* ****************     Driving Buttons    *****************************************************
         // Drive at half speed when the right bumper is held
             new JoystickButton(m_rightStick, JoystickConstants.kDriveSpeedLimiterButton)
                 .whenPressed(() -> m_robotDrive.setMaxOutput(DriveConstants.kLowSpeedDrivePowerLimit))
                 .whenReleased(() -> m_robotDrive.setMaxOutput(1));
-
+    */
     
     // *********************************************************************************************
     // ****************    Shooter and Intake Buttons    *******************************************
