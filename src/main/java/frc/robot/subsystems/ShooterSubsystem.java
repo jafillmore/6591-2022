@@ -2,10 +2,11 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants.ShooterConstants;
 
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxRelativeEncoder;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,9 +18,12 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANSparkMax m_conveyorMiddle = new CANSparkMax(ShooterConstants.conveyor, MotorType.kBrushed);
     private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
   
+    private final RelativeEncoder m_shooterEndEncoder = m_shooterEnd.getEncoder();
+     private SparkMaxPIDController m_shooterPID = m_shooterEnd.getPIDController();
+
+     
     
-    public DigitalInput limitSwitch = new DigitalInput(ShooterConstants.LimitSwitchPort);
-    private boolean isBallPrimed = false;
+     private boolean isBallPrimed = false;
     private boolean onTarget = false;
     
     public void shooterSubsystem() {
@@ -83,30 +87,29 @@ public class ShooterSubsystem extends SubsystemBase {
     m_shooterEnd.setInverted(true);
     m_conveyorMiddle.setInverted(false);
     
+    m_shooterPID.setP(ShooterConstants.kP);
+     m_shooterPID.setI(ShooterConstants.kI);
+     m_shooterPID.setD(ShooterConstants.kD);
+     m_shooterPID.setIZone(ShooterConstants.kIz);
+     m_shooterPID.setFF(ShooterConstants.kFF);
+     m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);
     
-    m_shooterEnd.set(speedOfShooter);
-    Timer.delay(ShooterConstants.conveyorDelay);
+    m_shooterPID.setReference(speedOfShooter, CANSparkMax.ControlType.kVelocity);
     m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     
-    
- 
 
-   // PID.setReference(speedOfShooter, ControlType.kVelocity);
-
-    // SmartDashboard.putNumber("Actual Motor RPM", (encoder.getVelocity()));
-    //SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter/3));
+     SmartDashboard.putNumber("Actual Motor RPM", (m_shooterEndEncoder.getVelocity()));
+     SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
     
-    /*if(!isBallPrimed){
-      primeBall();
-    } else {
-*/
-    /*  if(encoder.getVelocity() >= (speedOfShooter/3 -PIDConst.AllowableSpeedError)){
-        primeMotor.set(ShooterConst.primeMotorShootSpeed);
-      } else if(encoder.getVelocity() <= speedOfShooter/3-PIDConst.AllowableSpeedError) {
-        primeMotor.set(0);
+   
+
+     if(m_shooterEndEncoder.getVelocity() >= (speedOfShooter -ShooterConstants.AllowableSpeedError)){
+        m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+      } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter/3-ShooterConstants.AllowableSpeedError) {
+        m_conveyorMiddle.set(0);
       }
-    //} */
-  }
+    } 
+  
 
   ////////////  Turn off Shooter Motor and Conveyer Motor ////////////////
   public void shooterOff(){

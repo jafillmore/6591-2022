@@ -81,16 +81,23 @@ public final class Constants {
     public static final double intakePower = 1; 
     public static final double conveyorLowPower = 0.6;
     public static final double conveyorHighPower = 1.0;
-    public static final double shooterLowPower = 0.45;
-    public static final double shooterHighPower = 1.0;
+    public static final double shooterLowPower = 3000;
+    public static final double shooterHighPower = 5000;
+
+    public static final double kP = 6e-5;
+    public static final double kI = 0;
+    public static final double kD = 0;
+    public static final double kIz =0; 
+    public static final double kFF = 0.000015;
+    public static final double kMaxOutput = 1; 
+    public static final double kMinOutput = -1; 
+    public static final double maxPRM = 5700;
+
+    public static final double AllowableSpeedError = 300;
 
     // Conveyer Delay before Shooting
     public static final double conveyorDelay = 1.0;
-    
-    // Port for 'Ball is Primed' Limit Switch 
-    // ********* UPDATE REQUIRED **********************
-    // ********* Confrim DIO Port Number Once encoder wiring is done...
-    public static final int LimitSwitchPort = 1;
+
   }
 
   public static final class DriveConstants {

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
-//comment
+
 public class ClimberSubsystem extends SubsystemBase {
     // Define Climb Motor Controllers    
     private final CANSparkMax m_positionLeft = new CANSparkMax(ClimberConstants.kLeftArmPositionMotorPort, MotorType.kBrushed);
