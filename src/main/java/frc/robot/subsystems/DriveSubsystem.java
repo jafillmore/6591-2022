@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import java.lang.Math;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.MecanumDriveMotorVoltages;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
@@ -17,6 +18,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
+
 
 public class DriveSubsystem extends SubsystemBase {
   //Define the motor contollers
@@ -100,9 +102,9 @@ public class DriveSubsystem extends SubsystemBase {
   @SuppressWarnings("ParameterName")
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     if (fieldRelative) {
-      m_drive.driveCartesian(ySpeed, xSpeed, rot, -m_gyro.getAngle());
+      m_drive.driveCartesian(Math.abs(ySpeed)*ySpeed, Math.abs(xSpeed)*xSpeed, rot, -m_gyro.getAngle());
     } else {
-      m_drive.driveCartesian(ySpeed, xSpeed, rot);
+      m_drive.driveCartesian(Math.abs(ySpeed)*ySpeed, Math.abs(xSpeed)*xSpeed, Math.abs(rot)*rot);
     }
   }
 

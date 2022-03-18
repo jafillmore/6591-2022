@@ -48,7 +48,36 @@ public class ClimberSubsystem extends SubsystemBase {
     // ************************************************
     // Method to Rotate arms 
     // *********** UPDATE NEEDED **********************
-    // Need to add a method using PID control to Rotate the arms to a target position
+    // Need to aadd a method using PID control to Rotate the arms to a target position
+    
+    // Temporary method using button box to position arms
+    public void leftArmForward(){
+      m_positionLeft.set(-ClimberConstants.rotatePower);
+    }
+
+    public void rightArmForward(){
+      m_positionRight.set(ClimberConstants.rotatePower);
+    }
+
+    public void leftArmBack(){
+      m_positionLeft.set(ClimberConstants.rotatePower);
+    }
+
+    public void rightArmBack(){
+      m_positionRight.set(-ClimberConstants.rotatePower);
+    }
+
+    public void leftArmOff(){
+      m_positionLeft.set(0);
+    }
+
+    public void rightArmOff(){
+      m_positionRight.set(0);
+    }
+
+  
+
+
 
     // ************************************************
     // Method to automate climb

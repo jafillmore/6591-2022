@@ -18,23 +18,58 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final class ClimberConstants{
+  
+  public static final class JoystickConstants{
     
-    //********** UPDATE REQUIRED **********************
-    // ********* Need to confirm CAN ID numbers for 
-    public static final int kLeftArmPositionMotorPort = 8;
-    public static final int kLeftWinchMotorPort = 9;
+    //Joystick USB Ports
+    public static final int kLeftJoystickPort = 0;
+    public static final int kRightJoystickPort = 1;
+    public static final int kButtonBoxPort = 2;
+
+    // Left Joystick Buttons
+    public static final int kIntakeButton = 1;
+    public static final int kReverseIntakeButton = 2;
+
+    // Right Joystick Buttons
+    public static final int kDriveSpeedLimiterButton = 1;
+    public static final int kShootHighButton = 3;
+    public static final int kShootLowButton = 4;
+
+    // Button Box Buttons
+    public static final int kLeftArmFowardButton = 11;
+    public static final int kLeftArmBackButton = 12;
+    public static final int kRightArmForwardButton = 13;
+    public static final int kRightArmBackButton = 14;
+
+  }
+    
+  public static final class ClimberConstants{
+        
+    // Motor CAN ID numbers 
+    public static final int kLeftArmPositionMotorPort = 9;
+    public static final int kLeftWinchMotorPort = 11;
     public static final int kRightWinchMotorPort = 10;
-    public static final int kRightArmPositionMotorPort = 11;
+    public static final int kRightArmPositionMotorPort = 8;
 
     // Roborio Ports for arm position encoders
-    //********** UPDATE REQUIRED **********************
+    // ********* UPDATE REQUIRED **********************
     // ********* Need to confirm Port IDs for seat motor encoders 
 
+    // Power for arm rotation
+    public static final double rotatePower = 0.25;
 
+    // Constants for arm rotation PID Control
+    // ********* UPDATE REQUIRED **********************
+    // ********* Add these constants when the PID Control is added
+
+    // Constants for winch motor PID Control
+    // ********* UPDATE REQUIRED **********************
+    // ********* Add these constants when the PID Control is added
 
 
   }
+
+
   public static final class ShooterConstants{
     
     // Intake and Shooter Motor CAN IDs
@@ -44,12 +79,17 @@ public final class Constants {
     
     // Intake and Shooter Power Settings
     public static final double intakePower = 1; 
-    public static final double conveyorlowPower = 0.4;
-    public static final double conveyorhighPower = 1.0;
-    public static final double shooterlowPower = 0.5;
-    public static final double shooterhighPower = 0.8;
+    public static final double conveyorLowPower = 0.6;
+    public static final double conveyorHighPower = 1.0;
+    public static final double shooterLowPower = 0.45;
+    public static final double shooterHighPower = 1.0;
+
+    // Conveyer Delay before Shooting
+    public static final double conveyorDelay = 1.0;
     
-    // Port for 'Ball is Primed' Limit Switch
+    // Port for 'Ball is Primed' Limit Switch 
+    // ********* UPDATE REQUIRED **********************
+    // ********* Confrim DIO Port Number Once encoder wiring is done...
     public static final int LimitSwitchPort = 1;
   }
 
@@ -58,6 +98,8 @@ public final class Constants {
     public static final int kRearRightMotorPort = 2;
     public static final int kFrontLeftMotorPort = 3;
     public static final int kFrontRightMotorPort = 4;
+
+    public static final double kLowSpeedDrivePowerLimit = 0.5;
   
     public static final int[] kFrontLeftEncoderPorts = new int[] {0, 1};
     public static final int[] kRearLeftEncoderPorts = new int[] {2, 3};
