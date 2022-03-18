@@ -9,9 +9,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 public class ShooterSubsystem extends SubsystemBase {
     public final  CANSparkMax m_intakeFront = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushed);
@@ -33,8 +32,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-    
-    
+      
+      SmartDashboard.putNumber("Actual Motor RPM", m_shooterEndEncoder.getVelocity());
+     
 }
 
   public void primeBall(){
@@ -98,8 +98,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     
 
-     SmartDashboard.putNumber("Actual Motor RPM", (m_shooterEndEncoder.getVelocity()));
-     SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
+    SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
     
    
 

@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import frc.robot.subsystems.ShooterSubsystem.*;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -14,6 +16,8 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -106,7 +110,7 @@ public class RobotContainer {
             .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
             .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
-            
+
     // *********************************************************************************************
     // ****************    Climber Buttons    ******************************************************
     // *********************************************************************************************
@@ -132,10 +136,12 @@ public class RobotContainer {
 
 
 
+           
 
 
-
-
+            
+                
+                
 
 /////// Insert new buttons above here!
 }
