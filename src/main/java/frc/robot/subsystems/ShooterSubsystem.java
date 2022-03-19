@@ -51,7 +51,11 @@ public class ShooterSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Actual Motor RPM", m_shooterEndEncoder.getVelocity());
       SmartDashboard.putNumber("Shooter Motor Temp", m_shooterEnd.getMotorTemperature());
       
-   
+
+      SmartDashboard.putNumber("Red", detectedColor.red);
+      SmartDashboard.putNumber("Green", detectedColor.green);
+      SmartDashboard.putNumber("Blue", detectedColor.blue);
+      SmartDashboard.putNumber("Range", m_colorSensor.getIR());
      
 }
 
