@@ -24,26 +24,23 @@ public class ShooterSubsystem extends SubsystemBase {
     
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-    public final ColorMatch m_colorMatcher =new ColorMatch();
+    private final ColorMatch m_colorMatcher =new ColorMatch();
     Color detectedColor = m_colorSensor.getColor();
     
      private boolean isBallPrimed = false;
     private boolean onTarget = false;
 
         // Color Sensor Targets  
-        public final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
+        public final Color kBlueTarget = new Color(0.143, 0.311, 0.429);
         public final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
-        public final Color kRedTarget = new Color(0.561, 0.232, 0.114);
+        public final Color kRedTarget = new Color(0.431, 0.321, 0.114);
         public final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
   
     
   
     public void shooterSubsystem() {
 
-      m_colorMatcher.addColorMatch(kBlueTarget);
-      m_colorMatcher.addColorMatch(kGreenTarget);
-      m_colorMatcher.addColorMatch(kRedTarget);
-      m_colorMatcher.addColorMatch(kYellowTarget); 
+       
 
     
 
@@ -53,7 +50,14 @@ public class ShooterSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
       
+      m_colorMatcher.addColorMatch(kBlueTarget);
+      m_colorMatcher.addColorMatch(kGreenTarget);
+      m_colorMatcher.addColorMatch(kRedTarget);
+      m_colorMatcher.addColorMatch(kYellowTarget);
+
       Color detectedColor = m_colorSensor.getColor();
+
+
 
       /**
        * Run the color match algorithm on our detected color
@@ -82,16 +86,21 @@ public class ShooterSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Blue", detectedColor.blue);
       SmartDashboard.putNumber("Range", m_colorSensor.getIR());
       SmartDashboard.putString("Detected Color", colorString);
-     
+      SmartDashboard.putNumber("Confidence", match.confidence);
 }
 
   public void primeBall(){
     m_conveyorMiddle.setInverted(false);
     m_intakeFront.setInverted(true);
     m_intakeFront.set(ShooterConstants.intakePower);
+   if (m_colorSensor.getIR() >=8 && match.color == kRedTarget){
+     m_conveyorMiddle.set(0);
+   } else {
     m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
+   }
+   
     
-    
+   /* 
     if(limitSwitch.get()){
       m_conveyorMiddle.set(0);
       isBallPrimed = true;
@@ -105,7 +114,7 @@ public class ShooterSubsystem extends SubsystemBase {
       } 
 
     }
-    
+    */
   }
 
     // Method to to reverse Intake and eject balls
