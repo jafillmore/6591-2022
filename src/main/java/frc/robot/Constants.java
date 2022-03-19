@@ -102,6 +102,7 @@ public final class Constants {
   }
 
   public static final class DriveConstants {
+    public static final int kNavXPort = 1;
     public static final int kRearLeftMotorPort = 1;
     public static final int kRearRightMotorPort = 2;
     public static final int kFrontLeftMotorPort = 3;

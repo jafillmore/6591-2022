@@ -4,20 +4,19 @@
 
 package frc.robot.subsystems;
 
-import java.lang.Math;
+import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxRelativeEncoder;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.MecanumDriveMotorVoltages;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import frc.robot.Constants.DriveConstants;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxRelativeEncoder;
+import frc.robot.Constants.DriveConstants;
 
 
 public class DriveSubsystem extends SubsystemBase {
@@ -40,11 +39,13 @@ public class DriveSubsystem extends SubsystemBase {
   // The gyro sensor
   // **************  THIS NEEDS TO BE UPDATED!  ***************************
   //*************** Switch to Kauai Labs NavX-MPX - see details at:  https://www.kauailabs.com/navx-mxp/
-  private final Gyro m_gyro = new ADXRS450_Gyro();
+ 
+    private final AHRS ahrs = new AHRS();
+
 
   // Odometry class for tracking robot pose
   MecanumDriveOdometry m_odometry =
-      new MecanumDriveOdometry(DriveConstants.kDriveKinematics, m_gyro.getRotation2d());
+      new MecanumDriveOdometry(DriveConstants.kDriveKinematics, ahrs.getRotation2d());
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -70,7 +71,7 @@ public class DriveSubsystem extends SubsystemBase {
     
     // Update the odometry in the periodic block
     m_odometry.update(
-        m_gyro.getRotation2d(),
+        ahrs.getRotation2d(),
         new MecanumDriveWheelSpeeds(
             m_frontLeftEncoder.getVelocity(),
             m_rearLeftEncoder.getVelocity(),
@@ -93,7 +94,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @param pose The pose to which to set the odometry.
    */
   public void resetOdometry(Pose2d pose) {
-    m_odometry.resetPosition(pose, m_gyro.getRotation2d());
+    m_odometry.resetPosition(pose, ahrs.getRotation2d());
   }
 
   /**
@@ -108,7 +109,7 @@ public class DriveSubsystem extends SubsystemBase {
   @SuppressWarnings("ParameterName")
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     if (fieldRelative) {
-      m_drive.driveCartesian(Math.abs(ySpeed)*ySpeed, Math.abs(xSpeed)*xSpeed, rot, -m_gyro.getAngle());
+      m_drive.driveCartesian(Math.abs(ySpeed)*ySpeed, Math.abs(xSpeed)*xSpeed, rot, -ahrs.getAngle());
     } else {
       m_drive.driveCartesian(Math.abs(ySpeed)*ySpeed, Math.abs(xSpeed)*xSpeed, Math.abs(rot)*rot);
     }
@@ -190,7 +191,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Zeroes the heading of the robot. */
   public void zeroHeading() {
-    m_gyro.reset();
+    ahrs.reset();
   }
 
   /**
@@ -199,7 +200,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the robot's heading in degrees, from -180 to 180
    */
   public double getHeading() {
-    return m_gyro.getRotation2d().getDegrees();
+    return ahrs.getRotation2d().getDegrees();
   }
 
   /**
@@ -208,6 +209,6 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    return -m_gyro.getRate();
+    return -ahrs.getRate();
   }
 }
