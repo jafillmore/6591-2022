@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.ColorMatch;
@@ -27,7 +28,8 @@ public class ShooterSubsystem extends SubsystemBase {
     private final ColorMatch m_colorMatcher =new ColorMatch();
     Color detectedColor = m_colorSensor.getColor();
     
-     private boolean isBallPrimed = false;
+    private String colorString;
+    private boolean isBallPrimed = false;
     private boolean onTarget = false;
 
         // Color Sensor Targets  
@@ -62,7 +64,7 @@ public class ShooterSubsystem extends SubsystemBase {
       /**
        * Run the color match algorithm on our detected color
        */
-      String colorString;
+   
       ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
   
       if (match.color == kBlueTarget) {
@@ -90,10 +92,11 @@ public class ShooterSubsystem extends SubsystemBase {
 }
 
   public void primeBall(){
+    ColorMatchResult match2 = m_colorMatcher.matchClosestColor(detectedColor);
     m_conveyorMiddle.setInverted(false);
     m_intakeFront.setInverted(true);
     m_intakeFront.set(ShooterConstants.intakePower);
-   if (m_colorSensor.getIR() >=8 && match.color == kRedTarget){
+   if (colorString == "Red" || colorString == "Blue"){
      m_conveyorMiddle.set(0);
    } else {
     m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
