@@ -31,6 +31,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import java.util.List;
 
+import edu.wpi.first.wpilibj.util.Color;
+import com.revrobotics.ColorMatchResult;
+
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -50,9 +53,17 @@ public class RobotContainer {
   private Joystick m_bBox = new Joystick(JoystickConstants.kButtonBoxPort);
   
 
+  public final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
+  public final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
+  public final Color kRedTarget = new Color(0.561, 0.232, 0.114);
+  public final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    shooterSubsystem.m_colorMatcher.addColorMatch(kBlueTarget);
+    shooterSubsystem.m_colorMatcher.addColorMatch(kGreenTarget);
+    shooterSubsystem.m_colorMatcher.addColorMatch(kRedTarget);
+    shooterSubsystem.m_colorMatcher.addColorMatch(kYellowTarget);   
     // Configure the button bindings
     configureButtonBindings();
 
