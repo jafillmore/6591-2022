@@ -9,8 +9,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
-import edu.wpi.first.wpilibj.util.Color;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -100,11 +98,6 @@ public final class Constants {
     // Conveyer Delay before Shooting
     public static final double conveyorDelay = 1.0;
 
-    // Color Sensor Targets  
-    public final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
-    public final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
-    public final Color kRedTarget = new Color(0.561, 0.232, 0.114);
-    public final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
 
   }
 

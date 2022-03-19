@@ -4,8 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.subsystems.ShooterSubsystem.*;
-
+import java.util.List;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -16,23 +15,20 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import frc.robot.Constants.JoystickConstants;
-import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.ShooterConstants;
+import edu.wpi.first.wpilibj.XboxController;
 // ******** Not sure what this import is for....  import pabeles.concurrency.ConcurrencyOps.NewInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import java.util.List;
-
-import edu.wpi.first.wpilibj.util.Color;
-import com.revrobotics.ColorMatchResult;
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.JoystickConstants;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -53,18 +49,9 @@ public class RobotContainer {
   private Joystick m_bBox = new Joystick(JoystickConstants.kButtonBoxPort);
   
 
-  public final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
-  public final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
-  public final Color kRedTarget = new Color(0.561, 0.232, 0.114);
-  public final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    shooterSubsystem.m_colorMatcher.addColorMatch(kBlueTarget);
-    shooterSubsystem.m_colorMatcher.addColorMatch(kGreenTarget);
-    shooterSubsystem.m_colorMatcher.addColorMatch(kRedTarget);
-    shooterSubsystem.m_colorMatcher.addColorMatch(kYellowTarget);   
-    // Configure the button bindings
+
     configureButtonBindings();
 
     // Configure default commands
