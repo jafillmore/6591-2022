@@ -24,7 +24,7 @@ public class ShooterSubsystem extends SubsystemBase {
     
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-    public final ColorMatch m_colorMatcher =new ColorMatch();
+    private final ColorMatch m_colorMatcher = new ColorMatch();
     Color detectedColor = m_colorSensor.getColor();
     
      private boolean isBallPrimed = false;
@@ -44,8 +44,7 @@ public class ShooterSubsystem extends SubsystemBase {
       m_colorMatcher.addColorMatch(kGreenTarget);
       m_colorMatcher.addColorMatch(kRedTarget);
       m_colorMatcher.addColorMatch(kYellowTarget); 
-
-    
+   
 
 
     }
@@ -91,7 +90,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_intakeFront.set(ShooterConstants.intakePower);
     m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
     
-    
+    /*
     if(limitSwitch.get()){
       m_conveyorMiddle.set(0);
       isBallPrimed = true;
@@ -105,7 +104,7 @@ public class ShooterSubsystem extends SubsystemBase {
       } 
 
     }
-    
+    */
   }
 
     // Method to to reverse Intake and eject balls
