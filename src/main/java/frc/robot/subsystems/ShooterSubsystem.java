@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.RobotContainer.*;
 
 
 import com.revrobotics.CANSparkMax;
@@ -48,6 +49,26 @@ public class ShooterSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
       
+      Color detectedColor = m_colorSensor.getColor();
+
+      /**
+       * Run the color match algorithm on our detected color
+       */
+      String colorString;
+      ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+  
+      if (match.color == RobotContainer.kBlueTarget) {
+        colorString = "Blue";
+      } else if (match.color == RobotContainer.kRedTarget) {
+        colorString = "Red";
+      } else if (match.color == RobotContainer.kGreenTarget) {
+        colorString = "Green";
+      } else if (match.color == RobotContainer.kYellowTarget) {
+        colorString = "Yellow";
+      } else {
+        colorString = "Unknown";
+      }
+     
       SmartDashboard.putNumber("Actual Motor RPM", m_shooterEndEncoder.getVelocity());
       SmartDashboard.putNumber("Shooter Motor Temp", m_shooterEnd.getMotorTemperature());
       
