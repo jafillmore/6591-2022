@@ -36,6 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final RelativeEncoder m_frontRightEncoder = m_frontRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
   private final RelativeEncoder m_rearRightEncoder = m_rearRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
+
   // The gyro sensor
   // **************  THIS NEEDS TO BE UPDATED!  ***************************
   //*************** Switch to Kauai Labs NavX-MPX - see details at:  https://www.kauailabs.com/navx-mxp/
@@ -57,6 +58,8 @@ public class DriveSubsystem extends SubsystemBase {
     // gearbox is constructed, you might have to invert the left side instead.
     m_frontRight.setInverted(true);
     m_rearRight.setInverted(true);
+   
+    m_drive.setDeadband(0.06);
     
   }
 

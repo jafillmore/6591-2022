@@ -8,9 +8,18 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 
+import com.revrobotics.ColorSensorV3;
+import com.revrobotics.ColorMatch;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.util.Color;
+import com.revrobotics.ColorSensorV3;
+import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorMatch;
 
 public class ShooterSubsystem extends SubsystemBase {
     public final  CANSparkMax m_intakeFront = new CANSparkMax(ShooterConstants.intake, MotorType.kBrushed);
@@ -18,15 +27,19 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
   
     private final RelativeEncoder m_shooterEndEncoder = m_shooterEnd.getEncoder();
-     private SparkMaxPIDController m_shooterPID = m_shooterEnd.getPIDController();
-
-     
+    private SparkMaxPIDController m_shooterPID = m_shooterEnd.getPIDController();
+    
+    private final I2C.Port i2cPort = I2C.Port.kOnboard;
+    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+    Color detectedColor = m_colorSensor.getColor();
     
      private boolean isBallPrimed = false;
     private boolean onTarget = false;
+
+
+
     
     public void shooterSubsystem() {
-
 
     }
 
@@ -34,6 +47,9 @@ public class ShooterSubsystem extends SubsystemBase {
     public void periodic() {
       
       SmartDashboard.putNumber("Actual Motor RPM", m_shooterEndEncoder.getVelocity());
+      SmartDashboard.putNumber("Shooter Motor Temp", m_shooterEnd.getMotorTemperature());
+      
+   
      
 }
 
@@ -43,13 +59,13 @@ public class ShooterSubsystem extends SubsystemBase {
     m_intakeFront.set(ShooterConstants.intakePower);
     m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
     
-    /*
+    
     if(limitSwitch.get()){
       m_conveyorMiddle.set(0);
       isBallPrimed = true;
       Return;
     } else {
-      m_conveyorMiddle.set(ShooterConstants.conveyorlowPower);
+      m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
       if(!limitSwitch.get()){
         m_conveyorMiddle.set(0);
         isBallPrimed = false;
@@ -57,7 +73,7 @@ public class ShooterSubsystem extends SubsystemBase {
       } 
 
     }
-    */
+    
   }
 
     // Method to to reverse Intake and eject balls
@@ -78,8 +94,6 @@ public class ShooterSubsystem extends SubsystemBase {
     public void m_conveyorMiddleOn (){
       m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
     }
-
-
 
       ///////////////    Shooter Command   //////////////
 
