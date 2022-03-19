@@ -37,7 +37,14 @@ public class ShooterSubsystem extends SubsystemBase {
     private boolean onTarget = false;
 
 
+<<<<<<< HEAD
 
+=======
+  private final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
+  private final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
+  private final Color kRedTarget = new Color(0.561, 0.232, 0.114);
+  private final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
+>>>>>>> 381d8cdc7628c907c0c8c35bd8b448a9dcf95799
     
     public void shooterSubsystem() {
 
