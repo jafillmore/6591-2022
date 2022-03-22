@@ -40,6 +40,8 @@ public final class Constants {
     public static final int kLeftArmBackButton = 12;
     public static final int kRightArmForwardButton = 13;
     public static final int kRightArmBackButton = 14;
+    public static final int kExtendArms = 15;
+    public static final int kRetractArms = 16;
 
   }
     
@@ -56,12 +58,15 @@ public final class Constants {
     // ********* Need to confirm Port IDs for seat motor encoders 
 
     // Power for arm rotation
-    public static final double rotatePower = 0.25;
+    public static final double rotatePower = 1.0;
+    
 
     // Constants for arm rotation PID Control
     // ********* UPDATE REQUIRED **********************
     // ********* Add these constants when the PID Control is added
 
+    //Power for winch motors
+    public static final double winchPower = 1.0;
     // Constants for winch motor PID Control
     // ********* UPDATE REQUIRED **********************
     // ********* Add these constants when the PID Control is added
@@ -84,16 +89,16 @@ public final class Constants {
     public static final double shooterLowPower = 3000;
     public static final double shooterHighPower = 5000;
 
-    public static final double kP = 6e-5;
-    public static final double kI = 0;
-    public static final double kD = 0;
-    public static final double kIz =0; 
-    public static final double kFF = 0.000015;
+    public static final double kP = .00085;
+    public static final double kI = 0.00125;
+    public static final double kD = 2.0;
+    public static final double kIz =0.00; 
+    public static final double kFF = 0.00019;
     public static final double kMaxOutput = 1; 
     public static final double kMinOutput = -1; 
     public static final double maxPRM = 5700;
 
-    public static final double AllowableSpeedError = 300;
+    public static final double AllowableSpeedError = 600;
 
     // Conveyer Delay before Shooting
     public static final double conveyorDelay = 1.0;

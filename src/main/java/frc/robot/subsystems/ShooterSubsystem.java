@@ -7,6 +7,7 @@ import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,7 +20,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANSparkMax m_conveyorMiddle = new CANSparkMax(ShooterConstants.conveyor, MotorType.kBrushed);
     private final CANSparkMax m_shooterEnd = new CANSparkMax(ShooterConstants.shooter, MotorType.kBrushless);    
   
-    private final RelativeEncoder m_shooterEndEncoder = m_shooterEnd.getEncoder();
+    private final RelativeEncoder m_shooterEndEncoder = m_shooterEnd.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     private SparkMaxPIDController m_shooterPID = m_shooterEnd.getPIDController();
     
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
@@ -158,13 +159,14 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
     
    
-
+    //for (int i = 0; i < 1500; i++ ) {
      if(m_shooterEndEncoder.getVelocity() >= (speedOfShooter -ShooterConstants.AllowableSpeedError)){
         m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
-      } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter/3-ShooterConstants.AllowableSpeedError) {
+      } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter - ShooterConstants.AllowableSpeedError) {
         m_conveyorMiddle.set(0);
       }
-    } 
+    //}
+  } 
   
 
   ////////////  Turn off Shooter Motor and Conveyer Motor ////////////////

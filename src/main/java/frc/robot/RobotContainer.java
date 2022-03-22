@@ -95,19 +95,19 @@ public class RobotContainer {
                 .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
 
          // ****************    Reverse Intake   *********************************************************
-         new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
-         .whileHeld(new InstantCommand(() -> shooterSubsystem.ejectBall()))
-         .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
+            new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
+                .whileHeld(new InstantCommand(() -> shooterSubsystem.ejectBall()))
+                .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
             
         // ****************    Shoot High Button   *****************************************************
             new JoystickButton(m_leftStick, JoystickConstants.kShootHighButton)
-            .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
-            .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
+                .whileHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower)))
+                .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
         
         // ****************    Shoot Low Button   ******************************************************
             new JoystickButton(m_leftStick, JoystickConstants.kShootLowButton)
-            .whenHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
-            .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
+                .whileHeld(new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower)))
+                .whenReleased(new InstantCommand(() -> shooterSubsystem.shooterOff()));
 
 
     // *********************************************************************************************
@@ -123,14 +123,23 @@ public class RobotContainer {
             .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmForward()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
 
-        // ****************    Manual Winch Buttons  **************************************
-            new JoystickButton(m_bBox, JoystickConstants.kRightArmForwardButton)
+            new JoystickButton(m_bBox, JoystickConstants.kLeftArmBackButton)
             .whenHeld(new InstantCommand(() -> climberSubsystem.leftArmBack()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.leftArmOff()));
 
             new JoystickButton(m_bBox, JoystickConstants.kRightArmBackButton)
             .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmBack()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+
+
+        // ****************    Manual Winch Buttons  **************************************
+            new JoystickButton(m_bBox, JoystickConstants.kExtendArms)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.extendArms()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
+
+            new JoystickButton(m_bBox, JoystickConstants.kRetractArms)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.retractArms()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
 
 
