@@ -11,8 +11,8 @@ import com.revrobotics.SparkMaxPIDController;
 public class ClimberSubsystem extends SubsystemBase {
     // Define Climb Motor Controllers    
     private final CANSparkMax m_positionLeft = new CANSparkMax(ClimberConstants.kLeftArmPositionMotorPort, MotorType.kBrushed);
-    private final CANSparkMax m_climberLeft = new CANSparkMax(ClimberConstants.kLeftWinchMotorPort, MotorType.kBrushed);
-    private final CANSparkMax m_climberRight = new CANSparkMax(ClimberConstants.kRightWinchMotorPort, MotorType.kBrushed);
+    private final CANSparkMax m_climberLeft = new CANSparkMax(ClimberConstants.kLeftWinchMotorPort, MotorType.kBrushless);
+    private final CANSparkMax m_climberRight = new CANSparkMax(ClimberConstants.kRightWinchMotorPort, MotorType.kBrushless);
     private final CANSparkMax m_positionRight = new CANSparkMax(ClimberConstants.kRightArmPositionMotorPort, MotorType.kBrushed);
     
     // Define arm position encoders
