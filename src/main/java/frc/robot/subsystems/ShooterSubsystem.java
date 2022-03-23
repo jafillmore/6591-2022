@@ -32,20 +32,24 @@ public class ShooterSubsystem extends SubsystemBase {
     private boolean isBallPrimed = false;
     private boolean onTarget = false;
 
-        // Color Sensor Targets  
-        public final Color kBlueTarget = new Color(0.143, 0.311, 0.429);
-        public final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
-        public final Color kRedTarget = new Color(0.431, 0.321, 0.114);
-        public final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
+    // Color Sensor Targets  
+    private final Color kBlueTarget = new Color(0.143, 0.311, 0.429);
+    private final Color kGreenTarget = new Color(0.197, 0.561, 0.240);
+    private final Color kRedTarget = new Color(0.431, 0.321, 0.114);
+    private final Color kYellowTarget = new Color(0.361, 0.524, 0.113);
+
+
   
     
   
     public void shooterSubsystem() {
 
-       
-
-    
-
+      m_shooterPID.setP(ShooterConstants.kP);
+      m_shooterPID.setI(ShooterConstants.kI);
+      m_shooterPID.setD(ShooterConstants.kD);
+      m_shooterPID.setIZone(ShooterConstants.kIz);
+      m_shooterPID.setFF(ShooterConstants.kFF);
+      m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);      
 
     }
 
@@ -58,8 +62,6 @@ public class ShooterSubsystem extends SubsystemBase {
       m_colorMatcher.addColorMatch(kYellowTarget);
 
       Color detectedColor = m_colorSensor.getColor();
-
-
 
       /**
        * Run the color match algorithm on our detected color
@@ -81,97 +83,74 @@ public class ShooterSubsystem extends SubsystemBase {
      
       SmartDashboard.putNumber("Actual Motor RPM", m_shooterEndEncoder.getVelocity());
       SmartDashboard.putNumber("Shooter Motor Temp", m_shooterEnd.getMotorTemperature());
-      
-
-      SmartDashboard.putNumber("Red", detectedColor.red);
-      SmartDashboard.putNumber("Green", detectedColor.green);
-      SmartDashboard.putNumber("Blue", detectedColor.blue);
+      //SmartDashboard.putNumber("Red", detectedColor.red);
+      //SmartDashboard.putNumber("Green", detectedColor.green);
+      //SmartDashboard.putNumber("Blue", detectedColor.blue);
       SmartDashboard.putNumber("Range", m_colorSensor.getIR());
       SmartDashboard.putString("Detected Color", colorString);
       SmartDashboard.putNumber("Confidence", match.confidence);
-}
+    }
 
   public void primeBall(){
     ColorMatchResult match2 = m_colorMatcher.matchClosestColor(detectedColor);
     m_conveyorMiddle.setInverted(false);
     m_intakeFront.setInverted(true);
     m_intakeFront.set(ShooterConstants.intakePower);
-   if (colorString == "Red" || colorString == "Blue"){
-     m_conveyorMiddle.set(0);
-   } else {
-    m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
-   }
-   
     
-   /* 
-    if(limitSwitch.get()){
+    if (colorString == "Red" || colorString == "Blue"){
       m_conveyorMiddle.set(0);
-      isBallPrimed = true;
-      Return;
     } else {
       m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
-      if(!limitSwitch.get()){
-        m_conveyorMiddle.set(0);
-        isBallPrimed = false;
-          return;
-      } 
-
     }
-    */
+
   }
 
-    // Method to to reverse Intake and eject balls
-    public void ejectBall(){
-      m_conveyorMiddle.setInverted(true);
-      m_intakeFront.setInverted(false);
-      m_intakeFront.set(ShooterConstants.intakePower);
-      m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
-    }
+  // Method to to reverse Intake and eject balls
+  public void ejectBall(){
+    m_conveyorMiddle.setInverted(true);
+    m_intakeFront.setInverted(false);
+    m_intakeFront.set(ShooterConstants.intakePower);
+    m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+  }
 
-    
+  // Method to turn off intake  
     public void intakeOff(){
       m_intakeFront.set(0);
       m_conveyorMiddle.set(0);
     }
 
-
+  ///////////////    Method to turn on the conveyor (currently not used)   ////////////
     public void m_conveyorMiddleOn (){
       m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
     }
 
-      ///////////////    Shooter Command   //////////////
 
+  ///////////////    Shooter Command   //////////////
   public void shooterOn (double speedOfShooter){
     m_shooterEnd.setInverted(true);
     m_conveyorMiddle.setInverted(false);
-    
-    m_shooterPID.setP(ShooterConstants.kP);
-     m_shooterPID.setI(ShooterConstants.kI);
-     m_shooterPID.setD(ShooterConstants.kD);
-     m_shooterPID.setIZone(ShooterConstants.kIz);
-     m_shooterPID.setFF(ShooterConstants.kFF);
-     m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);
-    
+      
     m_shooterPID.setReference(speedOfShooter, CANSparkMax.ControlType.kVelocity);
     m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
-    
-
+  
     SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
-    
-   
-    //for (int i = 0; i < 1500; i++ ) {
-     if(m_shooterEndEncoder.getVelocity() >= (speedOfShooter -ShooterConstants.AllowableSpeedError)){
-        m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
-      } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter - ShooterConstants.AllowableSpeedError) {
-        m_conveyorMiddle.set(0);
-      }
-    //}
+     
+    if(m_shooterEndEncoder.getVelocity() >= (speedOfShooter -ShooterConstants.AllowableSpeedError)){
+      m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+    } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter - ShooterConstants.AllowableSpeedError) {
+      m_conveyorMiddle.set(0);
+    }
+
   } 
   
 
   ////////////  Turn off Shooter Motor and Conveyer Motor ////////////////
   public void shooterOff(){
-    m_shooterEnd.set(0);
+    //m_shooterEnd.set(0);
+    
+    /////////  set shooter speed to low speed  //////////
+    m_shooterPID.setReference(ShooterConstants.shooterLowPower, CANSparkMax.ControlType.kSmartVelocity);
+    
     m_conveyorMiddle.set(0);
   }
 

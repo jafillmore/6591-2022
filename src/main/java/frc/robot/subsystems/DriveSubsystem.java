@@ -37,11 +37,8 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   // The gyro sensor
-  // **************  THIS NEEDS TO BE UPDATED!  ***************************
-  //*************** Switch to Kauai Labs NavX-MPX - see details at:  https://www.kauailabs.com/navx-mxp/
- 
-    private final AHRS ahrs = new AHRS();
-
+  // Updated to Kauai Labs NavX-MPX - see details at:  https://www.kauailabs.com/navx-mxp/
+  private final AHRS ahrs = new AHRS();
 
   // Odometry class for tracking robot pose
   MecanumDriveOdometry m_odometry =
@@ -66,8 +63,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
-    
     
     // Update the odometry in the periodic block
     m_odometry.update(
