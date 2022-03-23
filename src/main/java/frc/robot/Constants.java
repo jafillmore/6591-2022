@@ -58,7 +58,7 @@ public final class Constants {
     // ********* Need to confirm Port IDs for seat motor encoders 
 
     // Power for arm rotation
-    public static final double rotatePower = 1.0;
+    public static final double rotatePower = 0.1;
     
 
     // Constants for arm rotation PID Control
@@ -66,7 +66,7 @@ public final class Constants {
     // ********* Add these constants when the PID Control is added
 
     //Power for winch motors
-    public static final double winchPower = 1.0;
+    public static final double winchPower = 0.1;
     // Constants for winch motor PID Control
     // ********* UPDATE REQUIRED **********************
     // ********* Add these constants when the PID Control is added
@@ -90,12 +90,12 @@ public final class Constants {
     public static final double shooterHighPower = 5000;
 
     public static final double kP = .00085;
-    public static final double kI = 0.00125;
-    public static final double kD = 2.0;
+    public static final double kI = 0.00;
+    public static final double kD = 0.0;
     public static final double kIz =0.00; 
     public static final double kFF = 0.00019;
     public static final double kMaxOutput = 1; 
-    public static final double kMinOutput = -1; 
+    public static final double kMinOutput = 0.00018; 
     public static final double maxPRM = 5700;
 
     public static final double AllowableSpeedError = 600;

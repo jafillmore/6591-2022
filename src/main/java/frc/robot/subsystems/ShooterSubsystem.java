@@ -149,7 +149,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //m_shooterEnd.set(0);
     
     /////////  set shooter speed to low speed  //////////
-    m_shooterPID.setReference(ShooterConstants.shooterLowPower, CANSparkMax.ControlType.kSmartVelocity);
+    m_shooterPID.setReference(ShooterConstants.shooterLowPower, CANSparkMax.ControlType.kVelocity);
     
     m_conveyorMiddle.set(0);
   }
