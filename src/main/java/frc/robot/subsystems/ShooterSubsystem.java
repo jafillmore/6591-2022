@@ -44,13 +44,6 @@ public class ShooterSubsystem extends SubsystemBase {
   
     public void shooterSubsystem() {
 
-      m_shooterPID.setP(ShooterConstants.kP);
-      m_shooterPID.setI(ShooterConstants.kI);
-      m_shooterPID.setD(ShooterConstants.kD);
-      m_shooterPID.setIZone(ShooterConstants.kIz);
-      m_shooterPID.setFF(ShooterConstants.kFF);
-      m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);      
-
     }
 
     @Override
@@ -129,6 +122,13 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shooterOn (double speedOfShooter){
     m_shooterEnd.setInverted(true);
     m_conveyorMiddle.setInverted(false);
+    
+    m_shooterPID.setP(ShooterConstants.kP);
+    m_shooterPID.setI(ShooterConstants.kI);
+    m_shooterPID.setD(ShooterConstants.kD);
+    m_shooterPID.setIZone(ShooterConstants.kIz);
+    m_shooterPID.setFF(ShooterConstants.kFF);
+    m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);      
       
     m_shooterPID.setReference(speedOfShooter, CANSparkMax.ControlType.kVelocity);
     m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);

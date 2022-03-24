@@ -40,9 +40,9 @@ public class ClimberSubsystem extends SubsystemBase {
     // *********** UPDATE NEEDED **********************
     // Need to add a method using PID control to extend the arms to a target position
     public void extendArms(){
-      m_climberLeft.setInverted(false);
-      m_climberRight.setInverted(true);
-      m_climberLeft.set(-ClimberConstants.winchPower);
+      m_climberLeft.setInverted(true);
+      m_climberRight.setInverted(false);
+      m_climberLeft.set(ClimberConstants.winchPower);
       m_climberRight.set(ClimberConstants.winchPower);
     }
     // ************************************************
@@ -50,9 +50,9 @@ public class ClimberSubsystem extends SubsystemBase {
     // *********** UPDATE NEEDED **********************
     // Need to add a method using PID control to retract the arms to a target position
     public void retractArms(){
-      m_climberLeft.setInverted(true);
-      m_climberRight.setInverted(false);
-      m_climberLeft.set(-ClimberConstants.winchPower);
+      m_climberLeft.setInverted(false);
+      m_climberRight.setInverted(true);
+      m_climberLeft.set(ClimberConstants.winchPower);
       m_climberRight.set(ClimberConstants.winchPower);
     }
    
