@@ -58,7 +58,7 @@ public final class Constants {
     // ********* Need to confirm Port IDs for seat motor encoders 
 
     // Power for arm rotation
-    public static final double rotatePower = 0.2;
+    public static final double rotatePower = 0.75;
     
 
     // Constants for arm rotation PID Control

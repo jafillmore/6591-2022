@@ -74,7 +74,7 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void rightArmForward(){
-      m_positionRight.set(ClimberConstants.rotatePower);
+      m_positionRight.set(-ClimberConstants.rotatePower);
     }
 
     public void leftArmBack(){
@@ -82,7 +82,7 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void rightArmBack(){
-      m_positionRight.set(-ClimberConstants.rotatePower);
+      m_positionRight.set(ClimberConstants.rotatePower);
     }
 
     public void leftArmOff(){
