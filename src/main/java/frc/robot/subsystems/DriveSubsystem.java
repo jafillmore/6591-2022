@@ -17,7 +17,7 @@ import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveSubsystem extends SubsystemBase {
   //Define the motor contollers
@@ -63,6 +63,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    
+    SmartDashboard.putNumber("Shooter Motor Temp", m_frontLeft.getMotorTemperature());
+    SmartDashboard.putNumber("Shooter Motor Temp", m_frontRight.getMotorTemperature());
+    SmartDashboard.putNumber("Shooter Motor Temp", m_rearLeft.getMotorTemperature());
+    SmartDashboard.putNumber("Shooter Motor Temp", m_rearRight.getMotorTemperature());
     
     // Update the odometry in the periodic block
     m_odometry.update(
