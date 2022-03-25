@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.sql.Time;
 import java.util.List;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -168,11 +169,13 @@ public class RobotContainer {
     //shoot the ball into low basket
     
     shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower);
-    Timer.delay(4);
+    Timer.delay(3);
     shooterSubsystem.m_conveyorMiddleOn();
     Timer.delay(3);
     shooterSubsystem.m_conveyorMiddleOff();
     m_robotDrive.moveDangIt();
+    Timer.delay(2);
+    m_robotDrive.stopDangIt();
     //shooterSubsystem.shooterOff();
     //m_robotDrive.drive(0, 0., 0, false);
     //Timer.delay(5);

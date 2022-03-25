@@ -214,11 +214,13 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   public void moveDangIt() {
-   m_drive.driveCartesian(0.0,0.25,0);
-   Timer.delay(1);
-   m_drive.driveCartesian(0,0,0);
+   m_drive.driveCartesian(1.0,0,0);
   }
-
+  
+  
+   public void stopDangIt() {
+    m_drive.driveCartesian(0,0,0);
+   }
 
 
 }
