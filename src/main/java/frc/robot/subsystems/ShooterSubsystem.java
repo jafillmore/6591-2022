@@ -114,7 +114,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   ///////////////    Method to turn on the conveyor (currently not used)   ////////////
     public void m_conveyorMiddleOn (){
-      m_conveyorMiddle.set(ShooterConstants.conveyorLowPower);
+      m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     }
 
 

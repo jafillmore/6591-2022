@@ -166,8 +166,17 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     //shoot the ball into low basket
-    new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower));
-    Timer.delay(2);
+    
+    shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower);
+    Timer.delay(4);
+    shooterSubsystem.m_conveyorMiddleOn();
+    Timer.delay(3);
+    shooterSubsystem.shooterOff();
+    //m_robotDrive.drive(0, 0., 0, false);
+    //Timer.delay(5);
+    new RunCommand(() -> m_robotDrive.drive(0,0.2,0,false), m_robotDrive);
+
+    /*
     // Create config for trajectory
     TrajectoryConfig config =
         new TrajectoryConfig(
@@ -216,6 +225,9 @@ public class RobotContainer {
     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return mecanumControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+
+    */
+    //return mecanumControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    return new InstantCommand(()-> m_robotDrive.drive(0, 0, 0, false));
   }
 }
