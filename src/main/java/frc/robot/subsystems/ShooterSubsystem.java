@@ -117,6 +117,10 @@ public class ShooterSubsystem extends SubsystemBase {
       m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     }
 
+    public void m_conveyorMiddleOff (){
+      m_conveyorMiddle.set(0);
+    }
+
 
   ///////////////    Shooter Command   //////////////
   public void shooterOn (double speedOfShooter){

@@ -171,10 +171,12 @@ public class RobotContainer {
     Timer.delay(4);
     shooterSubsystem.m_conveyorMiddleOn();
     Timer.delay(3);
+    shooterSubsystem.m_conveyorMiddleOff();
+
     shooterSubsystem.shooterOff();
     //m_robotDrive.drive(0, 0., 0, false);
     //Timer.delay(5);
-    new RunCommand(() -> m_robotDrive.drive(0,0.2,0,false), m_robotDrive);
+    m_robotDrive.drive(0,0.2,0,false);
 
     /*
     // Create config for trajectory
