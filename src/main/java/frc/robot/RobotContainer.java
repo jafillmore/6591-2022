@@ -132,6 +132,9 @@ public class RobotContainer {
             new JoystickButton(m_bBox, JoystickConstants.kRightArmBackButton)
             .whenHeld(new InstantCommand(() -> climberSubsystem.rightArmBack()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.rightArmOff()));
+          
+            
+            
 
 
         // ****************    Manual Winch Buttons  **************************************
@@ -143,10 +146,21 @@ public class RobotContainer {
             .whenHeld(new InstantCommand(() -> climberSubsystem.retractArms()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
+            new JoystickButton(m_bBox, 4)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.extendLeft()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
+            new JoystickButton(m_bBox, 5)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.extendRight()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
+            new JoystickButton(m_bBox, 9)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.retractLeft()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
-           
+            new JoystickButton(m_bBox, 10)
+            .whenHeld(new InstantCommand(() -> climberSubsystem.retractRight()))
+            .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
 
             

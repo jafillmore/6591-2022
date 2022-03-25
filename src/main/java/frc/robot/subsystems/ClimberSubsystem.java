@@ -45,6 +45,15 @@ public class ClimberSubsystem extends SubsystemBase {
       m_climberLeft.set(ClimberConstants.winchPower);
       m_climberRight.set(ClimberConstants.winchPower);
     }
+    public void extendLeft() {
+      m_climberLeft.setInverted(true);
+      m_climberLeft.set(ClimberConstants.winchPower);
+    }
+    public void extendRight() {
+      m_climberRight.setInverted(false);
+      m_climberRight.set(ClimberConstants.winchPower);
+    }
+
     // ************************************************
     // Method to retract arms 
     // *********** UPDATE NEEDED **********************
@@ -53,6 +62,15 @@ public class ClimberSubsystem extends SubsystemBase {
       m_climberLeft.setInverted(false);
       m_climberRight.setInverted(true);
       m_climberLeft.set(ClimberConstants.winchPower);
+      m_climberRight.set(ClimberConstants.winchPower);
+    }
+
+    public void retractLeft() {
+      m_climberLeft.setInverted(false);
+      m_climberLeft.set(ClimberConstants.winchPower);
+    }
+    public void retractRight() {
+      m_climberRight.setInverted(true);
       m_climberRight.set(ClimberConstants.winchPower);
     }
    
