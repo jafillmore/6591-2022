@@ -104,6 +104,8 @@ public class ShooterSubsystem extends SubsystemBase {
     m_intakeFront.setInverted(false);
     m_intakeFront.set(ShooterConstants.intakePower);
     m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+    m_shooterEnd.set(0.0);
+
   }
 
   // Method to turn off intake  

@@ -66,7 +66,7 @@ public final class Constants {
     // ********* Add these constants when the PID Control is added
 
     //Power for winch motors
-    public static final double winchPower = 0.8;
+    public static final double winchPower = 0.6;
     // Constants for winch motor PID Control
     // ********* UPDATE REQUIRED **********************
     // ********* Add these constants when the PID Control is added
