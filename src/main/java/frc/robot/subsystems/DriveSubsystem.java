@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.MecanumDriveMotorVoltages;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
@@ -209,6 +210,13 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public double getTurnRate() {
     return -ahrs.getRate();
+  }
+
+
+  public void moveDangIt() {
+   m_drive.driveCartesian(0.0,0.25,0);
+   Timer.delay(1);
+   m_drive.driveCartesian(0,0,0);
   }
 
 
