@@ -99,7 +99,9 @@ public class RobotContainer {
          // ****************    Reverse Intake   *********************************************************
             new JoystickButton(m_leftStick, JoystickConstants.kIntakeButton)
                 .whileHeld(new InstantCommand(() -> shooterSubsystem.ejectBall()))
-                .whenReleased(new InstantCommand(() -> shooterSubsystem.intakeOff()));
+                .whenReleased(
+                    new InstantCommand(() -> shooterSubsystem.intakeOff()),
+                    new InstantCommand(() -> shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower));
             
         // ****************    Shoot High Button   *****************************************************
             new JoystickButton(m_leftStick, JoystickConstants.kShootHighButton)
