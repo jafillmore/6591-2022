@@ -98,7 +98,7 @@ public final class Constants {
     public static final double kMinOutput = 0; 
     public static final double maxPRM = 5700;
 
-    public static final double AllowableSpeedError = 600;
+    public static final double AllowableSpeedError = 400;
 
     // Conveyer Delay before Shooting
     public static final double conveyorDelay = 1.0;
