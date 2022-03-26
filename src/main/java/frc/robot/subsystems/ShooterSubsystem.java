@@ -10,6 +10,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -137,11 +138,12 @@ public class ShooterSubsystem extends SubsystemBase {
     m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);      
       
     m_shooterPID.setReference(speedOfShooter, CANSparkMax.ControlType.kVelocity);
-    m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
+
   
     SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
      
     if(m_shooterEndEncoder.getVelocity() >= (speedOfShooter -ShooterConstants.AllowableSpeedError)){
+      Timer.delay(1.0);
       m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter - ShooterConstants.AllowableSpeedError) {
       m_conveyorMiddle.set(0);
@@ -149,6 +151,25 @@ public class ShooterSubsystem extends SubsystemBase {
 
   } 
   
+  ////////////  Spin up shooter to a specific rpm
+  public void shooterSpinUp (double speedOfShooter){
+    m_shooterEnd.setInverted(true);
+    m_conveyorMiddle.setInverted(false);
+    
+    m_shooterPID.setP(ShooterConstants.kP);
+    m_shooterPID.setI(ShooterConstants.kI);
+    m_shooterPID.setD(ShooterConstants.kD);
+    m_shooterPID.setIZone(ShooterConstants.kIz);
+    m_shooterPID.setFF(ShooterConstants.kFF);
+    m_shooterPID.setOutputRange(ShooterConstants.kMinOutput, ShooterConstants.kMaxOutput);      
+     
+    m_conveyorMiddle.set(0);
+    m_intakeFront.set(0);
+    m_shooterPID.setReference(speedOfShooter, CANSparkMax.ControlType.kVelocity);
+
+  }
+
+
 
   ////////////  Turn off Shooter Motor and Conveyer Motor ////////////////
   public void shooterOff(){
