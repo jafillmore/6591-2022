@@ -121,8 +121,8 @@ public final class Constants {
     public static final int[] kRearRightEncoderPorts = new int[] {6, 7};
 
     public static final boolean kFrontLeftEncoderReversed = false;
-    public static final boolean kRearLeftEncoderReversed = true;
-    public static final boolean kFrontRightEncoderReversed = false;
+    public static final boolean kRearLeftEncoderReversed = false;
+    public static final boolean kFrontRightEncoderReversed = true;
     public static final boolean kRearRightEncoderReversed = true;
 
     public static final double kTrackWidth = 0.5;
