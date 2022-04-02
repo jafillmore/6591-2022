@@ -32,9 +32,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   // Define the Encoders
   private final RelativeEncoder m_frontLeftEncoder = m_frontLeft.getEncoder();
-  private final RelativeEncoder m_rearLeftEncoder = m_rearLeft.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
-  private final RelativeEncoder m_frontRightEncoder = m_frontRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
-  private final RelativeEncoder m_rearRightEncoder = m_rearRight.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+  private final RelativeEncoder m_rearLeftEncoder = m_rearLeft.getEncoder();
+  private final RelativeEncoder m_frontRightEncoder = m_frontRight.getEncoder();
+  private final RelativeEncoder m_rearRightEncoder = m_rearRight.getEncoder();
 
   // The gyro sensor
   // Updated to Kauai Labs NavX-MPX - see details at:  https://www.kauailabs.com/navx-mxp/
@@ -68,6 +68,8 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Motor Temp", m_frontRight.getMotorTemperature());
     SmartDashboard.putNumber("Shooter Motor Temp", m_rearLeft.getMotorTemperature());
     SmartDashboard.putNumber("Shooter Motor Temp", m_rearRight.getMotorTemperature());
+    SmartDashboard.putNumber("Heading", ahrs.getRotation2d().getDegrees());
+
 
     // Update the odometry in the periodic block
     m_odometry.update(

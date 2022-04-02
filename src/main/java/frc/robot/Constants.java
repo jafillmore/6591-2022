@@ -115,11 +115,13 @@ public final class Constants {
 
     public static final double kLowSpeedDrivePowerLimit = 0.5;
   
+    /* *************  Not Used because we are using the sparkMax built-in encoders *****************
     public static final int[] kFrontLeftEncoderPorts = new int[] {0, 1};
     public static final int[] kRearLeftEncoderPorts = new int[] {2, 3};
     public static final int[] kFrontRightEncoderPorts = new int[] {4, 5};
     public static final int[] kRearRightEncoderPorts = new int[] {6, 7};
-
+    ***********************************************************************************************/
+    
     public static final boolean kFrontLeftEncoderReversed = false;
     public static final boolean kRearLeftEncoderReversed = false;
     public static final boolean kFrontRightEncoderReversed = true;
@@ -137,11 +139,12 @@ public final class Constants {
             new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
             new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
-    public static final int kEncoderCPR = 1024;
+    public static final int kEncoderCPR = 1;
     public static final double kWheelDiameterMeters = 0.15;
+    public static final double kDriveGearRatio = 10.71;
     public static final double kEncoderDistancePerPulse =
-        // Assumes the encoders are directly mounted on the wheel shafts
-        (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
+        // Assumes the encoders are directly mounted on the motor
+        (kWheelDiameterMeters * Math.PI) / (((double) kEncoderCPR) * kDriveGearRatio);
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
