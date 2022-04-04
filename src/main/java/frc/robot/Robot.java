@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.*;
 
 /**
@@ -29,9 +30,21 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    UsbCamera camera1 = CameraServer.startAutomaticCapture();
-    UsbCamera camera2 = CameraServer.startAutomaticCapture();
+    //UsbCamera camera1 = new UsbCamera("Cam1", 0);
+   // UsbCamera camera2 = new UsbCamera("Cam2", 1);
+
+		/* Configure Camera */
+		/* Note:  Higher resolution & framerate is possible, depending upon processing cpu usage */
+		//int width = 320;
+		//int height = 240;
+		//int frames_per_sec = 5;
+		//camera1.setVideoMode(PixelFormat.kMJPEG, width, height, frames_per_sec);
+    //camera2.setVideoMode(PixelFormat.kMJPEG, width, height, frames_per_sec);
+
+    //CameraServer.startAutomaticCapture();
+		
     m_robotContainer = new RobotContainer();
+
   }
 
   /**
