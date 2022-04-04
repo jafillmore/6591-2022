@@ -147,22 +147,21 @@ public class RobotContainer {
             .whenHeld(new InstantCommand(() -> climberSubsystem.retractArms()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
-            new JoystickButton(m_bBox, 4)
+            new JoystickButton(m_bBox, JoystickConstants.kBlackExtend)
             .whenHeld(new InstantCommand(() -> climberSubsystem.extendLeft()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
-            new JoystickButton(m_bBox, 5)
+            new JoystickButton(m_bBox, JoystickConstants.kOrangeExtend)
             .whenHeld(new InstantCommand(() -> climberSubsystem.extendRight()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
-            new JoystickButton(m_bBox, 9)
+            new JoystickButton(m_bBox, JoystickConstants.kBlackRetract)
             .whenHeld(new InstantCommand(() -> climberSubsystem.retractLeft()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
 
-            new JoystickButton(m_bBox, 10)
+            new JoystickButton(m_bBox, JoystickConstants.kOrangeRetract)
             .whenHeld(new InstantCommand(() -> climberSubsystem.retractRight()))
             .whenReleased(new InstantCommand(() -> climberSubsystem.winchOff()));
-
 
             
                 

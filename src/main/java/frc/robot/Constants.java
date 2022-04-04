@@ -36,6 +36,10 @@ public final class Constants {
     public static final int kShootLowButton = 4;
 
     // Button Box Buttons
+    public static final int kBlackExtend = 4;
+    public static final int kOrangeExtend = 5;
+    public static final int kBlackRetract = 9;
+    public static final int kOrangeRetract = 10;
     public static final int kLeftArmFowardButton = 11;
     public static final int kLeftArmBackButton = 12;
     public static final int kRightArmForwardButton = 13;
