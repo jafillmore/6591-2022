@@ -30,8 +30,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    UsbCamera camera1 = new UsbCamera("Cam1", 0);
-    UsbCamera camera2 = new UsbCamera("Cam2", 1);
+    UsbCamera camera1 = new UsbCamera("Cam1", 1);
+    //UsbCamera camera2 = new UsbCamera("Cam2", 1);
 
 		/* Configure Camera */
 		/* Note:  Higher resolution & framerate is possible, depending upon processing cpu usage */
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
 		int height = 240;
 		int frames_per_sec = 5;
 		camera1.setVideoMode(PixelFormat.kMJPEG, width, height, frames_per_sec);
-    camera2.setVideoMode(PixelFormat.kMJPEG, width, height, frames_per_sec);
+    //camera2.setVideoMode(PixelFormat.kMJPEG, width, height, frames_per_sec);
 
     CameraServer.startAutomaticCapture();
 		

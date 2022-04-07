@@ -143,7 +143,7 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Target Motor RPM", (speedOfShooter));
      
     if(m_shooterEndEncoder.getVelocity() >= (speedOfShooter -ShooterConstants.AllowableSpeedError)){
-      Timer.delay(1.0);
+      Timer.delay(0.5);
       m_conveyorMiddle.set(ShooterConstants.conveyorHighPower);
     } else if(m_shooterEndEncoder.getVelocity() <= speedOfShooter - ShooterConstants.AllowableSpeedError) {
       m_conveyorMiddle.set(0);
