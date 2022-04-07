@@ -144,7 +144,7 @@ public final class Constants {
             new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
     public static final int kEncoderCPR = 1;
-    public static final double kWheelDiameterMeters = 0.15;
+    public static final double kWheelDiameterMeters = 0.1524;
     public static final double kDriveGearRatio = 10.71;
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the motor

@@ -216,7 +216,10 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   public void moveDangIt() {
-   m_drive.driveCartesian(1.0,0,0);
+   resetEncoders();
+    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse < .1) {
+    m_drive.driveCartesian(0.20,0,0);
+    }    
   }
   
   

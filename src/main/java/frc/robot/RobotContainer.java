@@ -182,7 +182,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     //shoot the ball into low basket
     
-    shooterSubsystem.shooterOn(ShooterConstants.shooterLowPower);
+    shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower);
     Timer.delay(3);
     shooterSubsystem.m_conveyorMiddleOn();
     Timer.delay(3);
@@ -191,11 +191,12 @@ public class RobotContainer {
     Timer.delay(2);
     m_robotDrive.stopDangIt();
     //shooterSubsystem.shooterOff();
+    
     //m_robotDrive.drive(0, 0., 0, false);
     //Timer.delay(5);
    // m_robotDrive.drive(0,0.2,0,false);
 
-    /*
+   /*
     // Create config for trajectory
     TrajectoryConfig config =
         new TrajectoryConfig(
@@ -210,9 +211,9 @@ public class RobotContainer {
             // Start at the origin facing the +X direction
             new Pose2d(0, 0, new Rotation2d(0)),
             // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(0, 1), new Translation2d(0, 0.5)),
+            List.of(new Translation2d(1, 0), new Translation2d(0, 0.5)),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(0, 2, new Rotation2d(0)),
+            new Pose2d(2, 0, new Rotation2d(0)),
             config);
 
     MecanumControllerCommand mecanumControllerCommand =
@@ -245,8 +246,9 @@ public class RobotContainer {
 
     // Run path following command, then stop at the end.
 
+    
+    return mecanumControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
     */
-    //return mecanumControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
     return new InstantCommand(()-> m_robotDrive.drive(0, 0, 0, false));
   }
 }

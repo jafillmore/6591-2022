@@ -49,6 +49,7 @@ public class ClimberSubsystem extends SubsystemBase {
       m_climberLeft.setInverted(true);
       m_climberLeft.set(ClimberConstants.winchPower);
     }
+    
     public void extendRight() {
       m_climberRight.setInverted(false);
       m_climberRight.set(ClimberConstants.winchPower);
