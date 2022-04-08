@@ -181,14 +181,14 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     //shoot the ball into low basket
-    
+    m_robotDrive.resetEncoders();
     shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower);
     shooterSubsystem.primeBall();
     Timer.delay(1.5);
     shooterSubsystem.m_conveyorMiddleOn();
     Timer.delay(2);
     shooterSubsystem.m_conveyorMiddleOff();
-    m_robotDrive.moveDangIt(0.1);
+    m_robotDrive.moveDangIt(.06);
     Timer.delay(0.5);
     m_robotDrive.moveBack();
     shooterSubsystem.m_conveyorMiddleOn();
