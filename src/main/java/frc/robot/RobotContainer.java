@@ -183,7 +183,7 @@ public class RobotContainer {
     //shoot the ball into low basket
     
     shooterSubsystem.shooterOn(ShooterConstants.shooterHighPower);
-    Timer.delay(3);
+    Timer.delay(2);
     shooterSubsystem.m_conveyorMiddleOn();
     Timer.delay(3);
     shooterSubsystem.m_conveyorMiddleOff();
