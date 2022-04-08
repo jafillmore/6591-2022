@@ -215,13 +215,17 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
 
-  public void moveDangIt() {
+  public void moveDangIt(double dist) {
    resetEncoders();
-    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse < .1) {
+    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse < dist) {
     m_drive.driveCartesian(0.20,0,0);
     }    
   }
-  
+  public void moveBack() {
+    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse < 0) {
+      m_drive.driveCartesian(-0.20,0,0);
+  }
+}
   
    public void stopDangIt() {
     m_drive.driveCartesian(0,0,0);
