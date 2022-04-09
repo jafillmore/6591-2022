@@ -199,7 +199,7 @@ public class DriveSubsystem extends SubsystemBase {
   /**
    * Returns the heading of the robot.
    *
-   * @return the robot's heading in degrees, from -180 to 180
+   * @return the robot's heading in degrees, from -180 to 180h
    */
   public double getHeading() {
     return ahrs.getRotation2d().getDegrees();
@@ -223,7 +223,7 @@ public class DriveSubsystem extends SubsystemBase {
     }    
   }
   public void moveBack() {
-    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse >= 0.03) {
+    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse >= 0.04) {
       m_drive.driveCartesian(-0.20,0,0);
       SmartDashboard.putNumber("encoderCount", m_frontLeftEncoder.getPosition());
   }

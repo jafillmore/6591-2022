@@ -90,7 +90,7 @@ public final class Constants {
     public static final double intakePower = 1; 
     public static final double conveyorLowPower = 0.6;
     public static final double conveyorHighPower = 1.0;
-    public static final double shooterLowPower = 2000;
+    public static final double shooterLowPower = 2200;
     public static final double shooterHighPower = 3000;
 
     public static final double kP = .00045;

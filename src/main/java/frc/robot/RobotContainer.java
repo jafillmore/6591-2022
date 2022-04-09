@@ -188,7 +188,7 @@ public class RobotContainer {
     shooterSubsystem.m_conveyorMiddleOn();
     Timer.delay(2);
     shooterSubsystem.m_conveyorMiddleOff();
-    m_robotDrive.moveDangIt(.06);
+    m_robotDrive.moveDangIt(.07);
     Timer.delay(0.5);
     m_robotDrive.moveBack();
     shooterSubsystem.m_conveyorMiddleOn();
