@@ -223,7 +223,7 @@ public class DriveSubsystem extends SubsystemBase {
     }    
   }
   public void moveBack() {
-    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse >= 0.04) {
+    while (m_frontLeftEncoder.getPosition()*DriveConstants.kEncoderDistancePerPulse >= 0.03) {
       m_drive.driveCartesian(-0.20,0,0);
       SmartDashboard.putNumber("encoderCount", m_frontLeftEncoder.getPosition());
   }
